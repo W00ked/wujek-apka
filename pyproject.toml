@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logi-video-mvp"
+version = "0.1.0"
+description = "Local 9:16 video generator for LOGI meal analysis."
+readme = ""
+requires-python = ">=3.11"
+dependencies = [
+  "click",
+  "httpx",
+  "python-dotenv>=1.0",
+  "jinja2",
+  "openai",
+  "playwright",
+  "pydantic>=2",
+  "pydantic-settings",
+  "pyyaml",
+  "google-genai",
+  "tenacity",
+  "faster-whisper",
+]
+
+[project.scripts]
+logi-video = "src.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

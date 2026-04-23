@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, initial-scale=1.0">
+    <title>LOGI Video Template - Production Ready</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* TOKENY CSS */
+        :root {
+            --color-bg: #F4F5F4;
+            --color-surface: #FFFFFF;
+            --color-primary: #479655;
+            --color-success: #53A451;
+            --color-text-main: #1A1D1A;
+            --color-text-muted: #7A807C;
+            --color-border: #E8EAE9;
+            --color-risk-bg: #FDEBEB;
+            --color-risk-text: #BA4549;
+
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            --text-huge: 800 110px var(--font-family);
+            --text-h1: 700 56px var(--font-family);
+            --text-h2: 700 40px var(--font-family);
+            --text-body: 600 32px var(--font-family);
+            --text-body-reg: 500 30px var(--font-family);
+            --text-small: 500 24px var(--font-family);
+            
+            --radius-card: 48px;
+            --radius-box: 24px;
+            --radius-badge: 16px;
+            --spacing-main: 40px;
+            --spacing-card: 48px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            width: 1080px; 
+            min-height: 1920px;
+            background-color: var(--color-bg);
+            font-family: var(--font-family);
+            color: var(--color-text-main);
+            padding: 80px var(--spacing-main) 160px var(--spacing-main); 
+        }
+
+        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px; padding: 0 16px; }
+        .user-greeting { display: flex; align-items: center; gap: 24px; }
+        .avatar-placeholder { width: 80px; height: 80px; background-color: var(--color-text-main); border-radius: 50%; }
+        .greeting-text { font: var(--text-h2); color: var(--color-text-main); }
+
+        .meal-intro { margin-bottom: 40px; padding: 0 16px; }
+        .meal-title { font: var(--text-h1); margin-bottom: 16px; line-height: 1.2; color: var(--color-text-main); }
+        .meal-desc { font: var(--text-body-reg); color: var(--color-text-muted); line-height: 1.4; }
+
+        .card { background-color: var(--color-surface); border-radius: var(--radius-card); padding: var(--spacing-card); margin-bottom: var(--spacing-main); box-shadow: 0 8px 32px rgba(0,0,0,0.02); }
+        .card-header { font: var(--text-h2); color: var(--color-primary); margin-bottom: 40px; }
+
+        .top-stats { display: flex; align-items: stretch; margin-bottom: 48px; }
+        .gl-box { flex: 1; background-color: var(--color-success); border-radius: var(--radius-box); padding: 32px 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #FFFFFF; text-align: center; min-height: 200px; }
+        .gl-label { font: var(--text-body-reg); margin-bottom: 8px; white-space: nowrap; }
+        .gl-value { font: var(--text-huge); line-height: 1; white-space: nowrap; }
+        
+        .cal-box { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 48px; margin-left: 48px; border-left: 2px solid var(--color-border); overflow: hidden; }
+        .cal-label { font: var(--text-body-reg); margin-bottom: 8px; color: var(--color-text-main); white-space: nowrap; }
+        .cal-value { font: var(--text-huge); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .macro-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 2px solid var(--color-border); font: var(--text-body); }
+        .macro-row:last-child { border-bottom: none; padding-bottom: 8px; }
+        .macro-row.sub-row { padding-left: 48px; font: var(--text-body-reg); color: var(--color-text-muted); }
+        .macro-val { font-weight: 700; }
+        .unit { font-weight: 500; color: var(--color-text-muted); margin-left: 8px; }
+
+        .ingredient-item { display: flex; gap: 32px; padding: 32px 0; border-bottom: 2px solid var(--color-border); }
+        .ingredient-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .ing-thumb { width: 120px; height: 120px; background-color: var(--color-bg); border-radius: var(--radius-box); background-size: cover; background-position: center; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .ing-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .ing-name { font: var(--text-h2); color: var(--color-text-main); margin-bottom: 8px; }
+        .ing-cat { font: var(--text-small); color: var(--color-text-muted); margin-bottom: 20px; }
+        .ing-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+        
+        .badge { padding: 12px 24px; border-radius: var(--radius-badge); font: var(--text-small); }
+        .badge-neutral { background-color: var(--color-bg); color: var(--color-text-main); border: 2px solid var(--color-border); font-weight: 600; }
+        .badge-green { background-color: var(--color-success); color: #FFFFFF; font-weight: 600; }
+        .badge-red { background-color: var(--color-risk-bg); color: var(--color-risk-text); display: inline-flex; align-items: center; gap: 12px; font-weight: 700; }
+
+        .insight-text { font: var(--text-body-reg); line-height: 1.6; margin-bottom: 32px; }
+        .insight-text:last-of-type { margin-bottom: 0; }
+        .divider { height: 2px; background-color: var(--color-border); border: none; margin: 48px 0; }
+        .risks-title { font: var(--text-h2); color: var(--color-text-main); margin-bottom: 32px; }
+        .risks-container { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+    </style>
+</head>
+<body>
+
+    <div class="video-canvas">
+        
+        <header class="app-header">
+            <div class="user-greeting">
+                <div class="avatar-placeholder"></div>
+                <span class="greeting-text">Hello, That's LOGI App!</span>
+            </div>
+        </header>
+
+        <section class="meal-intro">
+            <h1 class="meal-title">{{ mealName }}</h1>
+            <p class="meal-desc">{{ mealDescription }}</p>
+        </section>
+
+        <section class="card">
+            <h2 class="card-header">Nutrition Label</h2>
+            <div class="top-stats">
+                <div class="gl-box">
+                    <span class="gl-label">Glycemic Load</span>
+                    <span class="gl-value">{{ total_gl }}</span> 
+                </div>
+                <div class="cal-box">
+                    <span class="cal-label">Calories</span>
+                    <span class="cal-value">{{ total_calories }}</span>
+                </div>
+            </div>
+
+            <div class="macros">
+                <div class="macro-row">
+                    <span class="macro-name">Carbohydrates</span>
+                    <span class="macro-val">{{ total_carbs }}<span class="unit">g</span></span>
+                </div>
+                <div class="macro-row sub-row">
+                    <span class="macro-name">Natural sugars</span>
+                    <span class="macro-val">{{ total_sugars }}<span class="unit">g</span></span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-name">Fats</span>
+                    <span class="macro-val">{{ total_fat }}<span class="unit">g</span></span>
+                </div>
+                <div class="macro-row sub-row">
+                    <span class="macro-name">Saturated</span>
+                    <span class="macro-val">{{ total_saturated }}<span class="unit">g</span></span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-name">Protein</span>
+                    <span class="macro-val">{{ total_protein }}<span class="unit">g</span></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card-header">Ingredients Found</h2>
+            
+            {% for ing in ingredients %}
+            <div class="ingredient-item">
+                <div class="ing-thumb" style="background-image: url('{{ ing.thumbnail_url }}');"></div>
+                <div class="ing-info">
+                    <div class="ing-name">{{ ing.name }}</div>
+                    <div class="ing-cat">{{ ing.category }}</div>
+                    <div class="ing-badges">
+                        <span class="badge badge-neutral">~ {{ ing.weight }} g</span>
+                        
+                        {% if ing.nutritional_actual.glycemic_index is not none %}
+                            <span class="badge badge-green">GI: {{ ing.nutritional_actual.glycemic_index }}</span>
+                        {% endif %}
+                        
+                        {% if ing.nutritional_actual.glycemic_load is not none %}
+                            <span class="badge badge-green">GL: {{ ing.nutritional_actual.glycemic_load }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="card">
+            <h2 class="card-header">Meal Insights</h2>
+            
+            {% for opinion in nutritionistsOpinion %}
+            <p class="insight-text">{{ opinion }}</p>
+            {% endfor %}
+            
+            {% if potentialHealthRisks and potentialHealthRisks|length > 0 %}
+            <hr class="divider">
+            <h3 class="risks-title">Potential risks</h3>
+            <div class="risks-container">
+                {% for risk in potentialHealthRisks %}
+                <span class="badge badge-red">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 15V4M4 15L11.5858 7.41421C12.3668 6.63316 13.6332 6.63317 14.4142 7.41421L15.5858 8.58579C16.3668 9.36683 17.6332 9.36684 18.4142 8.58579L20 7V17.5858L18.4142 19.1716C17.6332 19.9526 16.3668 19.9526 15.5858 19.1716L14.4142 18.0001C13.6332 17.219 12.3668 17.219 11.5858 18.0001L4 25.5858V15ZM4 15H11.5858C12.3668 15 13.6332 15 14.4142 14.219L15.5858 13.0474C16.3668 12.2663 17.6332 12.2663 18.4142 13.0474L20 14.6332" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{ risk }}
+                </span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+        </section>
+
+    </div>
+
+</body>
+</html>

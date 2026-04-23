@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LOGI — HyperFrames (placeholder)</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #f4f5f4;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="hf-root"
+      data-composition-id="logi-ui"
+      data-start="0"
+      data-duration="5"
+      data-width="1080"
+      data-height="1920"
+      data-track-index="0"
+    >
+      <p style="padding: 48px; font-family: system-ui">Placeholder — pipeline overwrites index.html.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["logi-ui"] = tl;
+    </script>
+  </body>
+</html>

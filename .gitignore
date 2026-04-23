@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+artifacts/
+output/
+playwright-report/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.egg-info/
+OpenCode Desktop Installer.exe

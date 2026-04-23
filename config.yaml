@@ -1,0 +1,105 @@
+app:
+  output_dir: output
+  artifacts_dir: artifacts
+  latest_link: copy
+  log_level: INFO
+
+render:
+  ui_backend: hyperframes
+  width: 1080
+  height: 1920
+  fps: 30
+  max_duration_sec: null
+  intro_max_sec: 7
+  ui_target_duration_sec: 23
+  ui_warmup_sec: 3.0
+  ui_end_hold_sec: 0.0
+  record_timeout_buffer_sec: 8.0
+  pad_to_30s: false
+  placeholder_asset: assets/ingredient_placeholder.png
+
+logi:
+  base_url: https://apilogi.com/demo/scan
+  timeout_sec: 60
+  language: en
+
+openai:
+  model: gpt-4o-mini
+  timeout_sec: 60
+  max_retries: 3
+
+tts:
+  model: gemini-3.1-flash-tts-preview
+  voice_name: kore
+  timeout_sec: 60
+  max_retries: 3
+  output_format: wav
+  speed: 1.2
+
+subtitles:
+  enabled: true
+  model: small
+  device: cpu
+  compute_type: int8
+  language: en
+  word_timestamps: true
+  max_words_per_line: 4
+  max_chars_per_line: 24
+  font_name: Poppins SemiBold
+  font_size: 68
+  bold: false
+  alignment: 2
+  margin_l: 120
+  margin_r: 120
+  margin_v: 380
+  primary_color: "&H00FFFFFF"
+  highlight_color: "&H0038D9FF"
+  outline_color: "&H00000000"
+  back_color: "&H50000000"
+  outline: 1.5
+  shadow: 0.0
+  border_style: 3
+  pop_in_ms: 140
+  fade_in_ms: 40
+  fade_out_ms: 60
+  fontsdir: assets/fonts
+
+heygen:
+  enabled: true
+  api_base_url: https://api.heygen.com
+  video_generate_path: /v3/videos
+  status_path: /v3/videos/{video_id}
+  avatar_look_path: /v3/avatars/looks/{look_id}
+  avatar_looks_path: /v3/avatars/looks
+  avatar_id: "7cf2de07e2854a8e9bee17ed9a515448"
+  voice_id: "3387059787f7439fb593690281a31599"
+  avatar_style: closeUp
+  preferred_orientation: portrait
+  auto_select_orientation_match: true
+  aspect_ratio: "9:16"
+  resolution: 1080p
+  voice_speed: 1.0
+  timeout_sec: 60
+  poll_interval_sec: 3
+  job_timeout_sec: 300
+  skip_intro_on_failure: true
+
+# Pełne ścieżki — winget często nie dodaje bin do PATH. Po upgrade Gyan.FFmpeg folder wersji może się zmienić;
+# wtedy popraw ścieżki albo dodaj ...\bin do zmiennej PATH użytkownika.
+ffmpeg:
+  binary: C:/Users/wikid/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1-full_build/bin/ffmpeg.exe
+  ffprobe_binary: C:/Users/wikid/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1-full_build/bin/ffprobe.exe
+
+playwright:
+  browser: chromium
+  font_wait_timeout_sec: 30
+
+# Lokalny projekt kompozycji (hyperframes init). Kopiowany do artifacts/<run>/hf_project/ przy każdym uruchomieniu.
+hyperframes:
+  project_template_dir: hyperframes_composition
+  npx_command: npx
+  render_timeout_sec: 3600
+  quality: standard
+  quiet: true
+  extra_args: []
+  node_options: null

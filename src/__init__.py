@@ -1,0 +1,1 @@
+"""LOGI video MVP package."""
