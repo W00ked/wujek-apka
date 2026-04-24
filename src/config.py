@@ -120,6 +120,9 @@ class HyperFramesConfig(BaseModel):
     """Local HyperFrames composition project (see hyperframes init)."""
 
     project_template_dir: Path = Path("hyperframes_composition")
+    # jinja_dynamic: render tamplate.html into hf_project/index.html (legacy).
+    # static_project: keep index.html from project_template_dir; only sync shared assets (e.g. GSAP).
+    render_mode: Literal["jinja_dynamic", "static_project"] = "jinja_dynamic"
     npx_command: str = "npx"
     # 0.4.17+ resolves FFmpeg on Windows via `where`; older npx cache used `which` and always failed.
     cli_package: str = "hyperframes@0.4.17"

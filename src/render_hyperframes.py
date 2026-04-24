@@ -28,19 +28,8 @@ def prepare_hf_project_dir(run_dir: Path, settings: Settings) -> Path:
     return hf_dir
 
 
-def render_hyperframes_index(
-    meal_scan: MealScan,
-    script_plan: ScriptPlan,
-    settings: Settings,
-    hf_project_dir: Path,
-    voice_duration_sec: float,
-) -> Path:
-    """Write index.html and sync static assets into a HyperFrames project directory."""
-    project_root = resolve_project_root(settings)
-    template_source = (project_root / "tamplate.html").read_text(encoding="utf-8")
-    env = Environment(autoescape=select_autoescape(["html", "xml"]))
-    template = env.from_string(build_hyperframes_runtime_template(template_source))
-
+def _sync_hf_project_shared_assets(hf_project_dir: Path, settings: Settings, project_root: Path) -> None:
+    """Copy vendor GSAP and optional placeholder into hf_project/assets (used by all render modes)."""
     assets_dir = hf_project_dir / "assets"
     assets_dir.mkdir(parents=True, exist_ok=True)
 
@@ -54,15 +43,42 @@ def render_hyperframes_index(
         raise PipelineError("missing local GSAP runtime: assets/vendor/gsap.min.js", code=40, step="render")
     shutil.copy2(gsap_src, assets_dir / "gsap.min.js")
 
+
+def render_hyperframes_index(
+    meal_scan: MealScan,
+    script_plan: ScriptPlan,
+    settings: Settings,
+    hf_project_dir: Path,
+    voice_duration_sec: float,
+) -> Path:
+    """Prepare hf_project: sync assets; either keep static index.html or render Jinja from tamplate.html."""
+    project_root = resolve_project_root(settings)
+    index_path = hf_project_dir / "index.html"
+
+    _sync_hf_project_shared_assets(hf_project_dir, settings, project_root)
+
+    if settings.hyperframes.render_mode == "static_project":
+        if not index_path.is_file():
+            raise PipelineError(
+                "static_project mode: missing hf_project/index.html (check hyperframes.project_template_dir)",
+                code=40,
+                step="render",
+            )
+        return index_path
+
+    template_source = (project_root / "tamplate.html").read_text(encoding="utf-8")
+    env = Environment(autoescape=select_autoescape(["html", "xml"]))
+    template = env.from_string(build_hyperframes_runtime_template(template_source))
+
     ctx = build_template_context(
         meal_scan=meal_scan,
         script_plan=script_plan,
         settings=settings,
         voice_duration_sec=voice_duration_sec,
     )
+    placeholder_name = settings.render.placeholder_asset.name
     ctx["placeholder_asset"] = f"assets/{placeholder_name}"
 
     html = template.render(**ctx)
-    index_path = hf_project_dir / "index.html"
     index_path.write_text(html, encoding="utf-8")
     return index_path
