@@ -56,8 +56,15 @@ class ImagePricingConfig(BaseModel):
 class ImageGenerationConfig(BaseModel):
     model: str = "gpt-image-2"
     prompt_version: str = "food-photo-v1"
-    size: Literal["auto", "1024x1024", "1536x1024", "1024x1536"] = "1024x1536"
-    quality: Literal["low", "medium", "high", "auto"] = "high"
+    size: Literal[
+        "auto",
+        "1024x1024",
+        "1536x1024",
+        "1024x1536",
+        "1024x1792",
+        "1792x1024",
+    ] = "1024x1536"
+    quality: Literal["low", "medium", "high", "auto", "standard", "hd"] = "high"
     output_format: Literal["png", "jpeg", "webp"] = "webp"
     output_compression: int | None = Field(default=92, ge=0, le=100)
     variants: int = Field(default=1, ge=1, le=4)

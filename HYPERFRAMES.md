@@ -12,7 +12,7 @@ This pipeline can render the LOGI HTML template with **HyperFrames** instead of 
   npx hyperframes browser ensure
   ```
 
-- **npx** available in the shell that runs the app. On Windows, if `npx` fails from Python, set `hyperframes.npx_command` in `config.yaml` to the full path of `npx.cmd` (e.g. under `Program Files\nodejs`).
+- **npx** available in the shell that runs the app. On Windows, if `npx` fails from Python, set `hyperframes.npx_command` in `config.yaml` to the full path of `npx.cmd` (e.g. under `Program Files\nodejs`). If the integrated terminal prepends a broken Cursor `node`/`npm` shim, run CLI checks from repo root with `.\scripts\hyperframes-run.ps1 --yes hyperframes@0.4.17 doctor` (the script prepends system Node to `PATH`).
 
 ## Configuration
 

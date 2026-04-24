@@ -1,19 +1,24 @@
 (function () {
+  var DEBOUNCE_MS = 40;
+  var debounceTimer = null;
+
   function data() {
-    return window.LOGI_AD_DATA || {};
+    return window.LOGI_AD_DATA || window.__LOGI_AD_DATA__ || {};
   }
 
   function text(id, value) {
     var node = document.getElementById(id);
     if (node && value !== undefined && value !== null && String(value).trim()) {
-      node.textContent = String(value);
+      var next = String(value);
+      if (node.textContent !== next) node.textContent = next;
     }
   }
 
   function image(id, value) {
     var node = document.getElementById(id);
     if (node && value) {
-      node.setAttribute("src", value);
+      var next = String(value);
+      if (node.getAttribute("src") !== next) node.setAttribute("src", next);
     }
   }
 
@@ -33,8 +38,9 @@
 
   function foodImage() {
     var item = data().food_image || {};
+    if (item.public_url) return item.public_url;
     var isNested = window.location.pathname.indexOf("/compositions/") >= 0;
-    return (isNested && item.nested_asset) || item.asset || item.public_url || "";
+    return (isNested && item.nested_asset) || item.asset || "";
   }
 
   function glLabel(prefix) {
@@ -79,8 +85,8 @@
       '<span>Cal <b style="color:#111827">' + m.calories + '</b></span>' +
       '<span>Carb <b style="color:#111827">' + m.carbs + '</b></span>' +
       '<span>Fat <b style="color:#111827">' + m.fat + '</b></span>' +
-      '<span>Pro <b style="color:#111827">' + m.protein + '</b></span>' +
-      '</div>';
+      '<span>Protein <b style="color:#111827">' + m.protein + '</b></span>' +
+      "</div>";
     root.appendChild(card);
   }
 
@@ -106,15 +112,16 @@
     panel.innerHTML =
       '<div style="font-size:42px;font-weight:850;color:#4b9d6c;margin-bottom:26px;">Nutrition Label</div>' +
       '<div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">' +
-      '<div style="border-radius:28px;background:' + glColor() + ';color:#fff;padding:24px;text-align:center;"><div style="font-size:29px;">Glycemic Load</div><div style="font-size:66px;font-weight:900;">' + metricValue("glycemic_load") + '</div></div>' +
-      '<div style="border-left:3px solid #e2e6eb;padding-left:34px;"><div style="font-size:31px;">Calories</div><div style="font-size:66px;font-weight:900;">' + m.calories + '</div></div>' +
-      '</div>' +
-      '<div style="margin-top:26px;font-size:34px;line-height:1.85;">Carbs <b style="float:right;">' + m.carbs + ' g</b><br>Fat <b style="float:right;">' + m.fat + ' g</b><br>Protein <b style="float:right;">' + m.protein + ' g</b></div>';
+      '<div style="border-radius:28px;background:' + glColor() + ';color:#fff;padding:24px;text-align:center;"><div style="font-size:29px;">Glycemic Load</div><div style="font-size:66px;font-weight:900;">' + metricValue("glycemic_load") + "</div></div>" +
+      '<div style="border-left:3px solid #e2e6eb;padding-left:34px;"><div style="font-size:31px;">Calories</div><div style="font-size:66px;font-weight:900;">' + m.calories + "</div></div>" +
+      "</div>" +
+      '<div style="margin-top:26px;font-size:34px;line-height:1.85;">Carbs <b style="float:right;">' + m.carbs + ' g</b><br>Fat <b style="float:right;">' + m.fat + ' g</b><br>Protein <b style="float:right;">' + m.protein + " g</b></div>";
     root.appendChild(panel);
   }
 
   function apply() {
     var d = data();
+    if (!d || Object.keys(d).length === 0) return;
     var m = d.metrics || {};
     var ingredients = d.ingredients || [];
     var risks = d.risks || [];
@@ -138,7 +145,15 @@
     text("nutrition-callout-gl", "Glycemic Load: " + metricValue("glycemic_load"));
     text("nutrition-callout-cal", m.calories + " calories");
     text("nutrition-callout-carb", m.carbs + "g carbohydrates");
-    text("ingredients-caption", ingredients.slice(0, 5).map(function (item) { return item.name; }).join(", ") + " - each ingredient gets its own nutrition context.");
+    text(
+      "ingredients-caption",
+      ingredients
+        .slice(0, 5)
+        .map(function (item) {
+          return item.name;
+        })
+        .join(", ") + " - each ingredient gets its own nutrition context."
+    );
     text("ingredients-tag-1", glLabel("meal GL"));
     text("ingredients-tag-2", ingredients.length + " ingredients");
     text("insights-risk-1", risks[0]);
@@ -150,10 +165,44 @@
     ensureNutritionPanel();
   }
 
-  window.LOGI_DYNAMIC_AD = { apply: apply };
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", apply);
-  } else {
+  function scheduleApply() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () {
+      debounceTimer = null;
+      try {
+        apply();
+      } catch (e) {}
+    }, DEBOUNCE_MS);
+  }
+
+  function watchDom() {
+    var mo = new MutationObserver(function (mutations) {
+      var i;
+      var j;
+      for (i = 0; i < mutations.length; i++) {
+        var nodes = mutations[i].addedNodes;
+        for (j = 0; j < nodes.length; j++) {
+          if (nodes[j].nodeType === 1) {
+            scheduleApply();
+            return;
+          }
+        }
+      }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  function boot() {
     apply();
+    watchDom();
+    window.addEventListener("load", scheduleApply, { once: true });
+  }
+
+  window.LOGI_DYNAMIC_AD = { apply: apply, scheduleApply: scheduleApply };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
   }
 })();

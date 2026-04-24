@@ -20,7 +20,6 @@
       --radius-xl: 54px;
       --radius-lg: 38px;
       --radius-md: 24px;
-      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; background: #101615; }
@@ -31,17 +30,71 @@
       overflow: hidden;
       background: radial-gradient(circle at 50% 0%, #5aa878 0%, #f4f4f3 38%, #f4f4f3 100%);
       color: var(--text);
-      font-family: var(--font);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     .composition-slot {
       position: absolute;
-      left: 0;
-      top: 0;
+      inset: 0;
       width: 1080px;
       height: 1920px;
       overflow: hidden;
       opacity: 0;
       transform-origin: center center;
+      isolation: isolate;
+    }
+    .composition-slot [data-composition-id] {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      box-sizing: border-box;
+      isolation: isolate;
+    }
+    .composition-slot .clip {
+      position: absolute;
+    }
+    /* Plan E: comment out the following [data-track-index] z-index block and re-run snapshot to confirm stacking regression. */
+    .composition-slot .clip[data-track-index="0"] { z-index: 0; }
+    .composition-slot .clip[data-track-index="1"] { z-index: 1; }
+    .composition-slot .clip[data-track-index="2"] { z-index: 2; }
+    .composition-slot .clip[data-track-index="3"] { z-index: 3; }
+    .composition-slot .clip[data-track-index="4"] { z-index: 4; }
+    .composition-slot .clip[data-track-index="5"] { z-index: 5; }
+    .composition-slot .clip[data-track-index="6"] { z-index: 6; }
+    .composition-slot .clip[data-track-index="7"] { z-index: 7; }
+    .composition-slot .clip[data-track-index="8"] { z-index: 8; }
+    .composition-slot .clip[data-track-index="9"] { z-index: 9; }
+    .composition-slot .clip[data-track-index="10"] { z-index: 10; }
+    .composition-slot .clip[data-track-index="11"] { z-index: 11; }
+    .composition-slot .clip[data-track-index="12"] { z-index: 12; }
+    .composition-slot .clip[data-track-index="13"] { z-index: 13; }
+    .composition-slot .clip[data-track-index="14"] { z-index: 14; }
+    .composition-slot .clip[data-track-index="15"] { z-index: 15; }
+    .composition-slot .clip[data-track-index="16"] { z-index: 16; }
+    .composition-slot .clip[data-track-index="17"] { z-index: 17; }
+    .composition-slot .clip[data-track-index="18"] { z-index: 18; }
+    .composition-slot .clip[data-track-index="19"] { z-index: 19; }
+    .composition-slot .clip[data-track-index="20"] { z-index: 20; }
+    .composition-slot .clip[data-track-index="21"] { z-index: 21; }
+    .composition-slot .clip[data-track-index="22"] { z-index: 22; }
+    .composition-slot .clip[data-track-index="23"] { z-index: 23; }
+    .composition-slot .clip[data-track-index="24"] { z-index: 24; }
+    .composition-slot .clip[data-track-index="25"] { z-index: 25; }
+    .composition-slot .clip[data-track-index="26"] { z-index: 26; }
+    .composition-slot .clip[data-track-index="27"] { z-index: 27; }
+    .composition-slot .clip[data-track-index="28"] { z-index: 28; }
+    .composition-slot .clip[data-track-index="29"] { z-index: 29; }
+    .composition-slot .clip[data-track-index="30"] { z-index: 30; }
+    .composition-slot .clip[data-track-index="31"] { z-index: 31; }
+    .composition-slot .clip[data-track-index="32"] { z-index: 32; }
+    .composition-slot .clip[data-track-index="33"] { z-index: 33; }
+    .composition-slot .clip[data-track-index="34"] { z-index: 34; }
+    .composition-slot .clip[data-track-index="35"] { z-index: 35; }
+    .composition-slot .clip[data-track-index="36"] { z-index: 36; }
+    .composition-slot .clip[data-track-index="37"] { z-index: 37; }
+    #results-flash,
+    .composition-slot .results-flash {
+      z-index: 70;
     }
     #hook-slot { z-index: 1; }
     #add-meal-slot { z-index: 2; }
@@ -57,6 +110,7 @@
   <div id="main"
        data-composition-id="dashboard"
        data-start="0"
+       data-duration="30"
        data-width="1080"
        data-height="1920">
 

@@ -1,6 +1,8 @@
 <template id="ad-add-meal-template">
   <div id="add-root"
        data-composition-id="ad-add-meal"
+       data-start="0"
+       data-duration="5.4"
        data-width="1080"
        data-height="1920">
 
@@ -93,12 +95,12 @@
         --green: #4b9d6c;
         --green-dark: #2b724f;
         --line: #e2e6eb;
-        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         position: relative;
         width: 1080px;
         height: 1920px;
         overflow: hidden;
-        font-family: var(--font);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: var(--canvas);
       }
       #add-root * { box-sizing: border-box; }
@@ -219,7 +221,8 @@
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo(["#add-phone-shadow", "#add-phone-frame", "#add-screen-empty", "#add-screen-filled"], { opacity: 0, y: 90, scale: 0.965 }, { opacity: 1, y: 0, scale: 1, duration: 0.66, stagger: 0.025, ease: "power3.out" }, 0);
+      gsap.set(["#add-phone-shadow", "#add-phone-frame", "#add-screen-empty", "#add-screen-filled"], { opacity: 0, y: 90, scale: 0.965 });
+      tl.to(["#add-phone-shadow", "#add-phone-frame", "#add-screen-empty", "#add-screen-filled"], { opacity: 1, y: 0, scale: 1, duration: 0.66, stagger: 0.025, ease: "power3.out" }, 0);
       tl.set("#add-screen-filled", { opacity: 0 }, 0.01);
       tl.fromTo(["#add-step-pill", "#add-headline", "#add-caption"], { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: 0.42, stagger: 0.08, ease: "power3.out" }, 0.36);
       tl.fromTo("#add-tap-ring-1", { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1.28, duration: 0.32, ease: "power2.out" }, 1.28);

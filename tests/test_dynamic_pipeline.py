@@ -9,7 +9,12 @@ from src.image_generation import (
     estimate_image_output_tokens,
 )
 from src.logi_client import build_scan_payload
-from src.r2_uploader import build_public_url, build_r2_object_key, slugify_for_object_key
+from src.r2_uploader import (
+    build_public_url,
+    build_r2_object_key,
+    r2_public_base_url_warning,
+    slugify_for_object_key,
+)
 
 
 class ImagePromptTests(unittest.TestCase):
@@ -28,6 +33,16 @@ class ImagePromptTests(unittest.TestCase):
         self.assertEqual(estimate.image_output_tokens, 6240)
         self.assertGreater(estimate.estimated_cost_usd, 0.18)
         self.assertLess(estimate.estimated_cost_usd, 0.25)
+
+
+class R2PublicUrlHintTests(unittest.TestCase):
+    def test_warns_on_api_host_public_base(self) -> None:
+        msg = r2_public_base_url_warning("https://abc.r2.cloudflarestorage.com")
+        self.assertIsNotNone(msg)
+        self.assertIn("R2.dev", msg)
+
+    def test_no_warning_for_https_dev_style(self) -> None:
+        self.assertIsNone(r2_public_base_url_warning("https://pub-xxxx.r2.dev"))
 
 
 class R2KeyTests(unittest.TestCase):

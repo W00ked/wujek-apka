@@ -70,11 +70,11 @@ def _sync_hf_project_shared_assets(
     return None
 
 
-def _inject_dynamic_scripts(html_path: Path, *, nested: bool) -> None:
+def _inject_dynamic_scripts(html_path: Path) -> None:
     text = html_path.read_text(encoding="utf-8")
-    if "logi_ad_data.js" in text:
+    if "logi_ad_data.js" in text and "dynamic-ad.js" in text:
         return
-    prefix = "../assets" if nested else "./assets"
+    prefix = "../assets" if html_path.parent.name == "compositions" else "./assets"
     scripts = (
         f'    <script src="{prefix}/logi_ad_data.js"></script>\n'
         f'    <script src="{prefix}/dynamic-ad.js"></script>\n'
@@ -107,11 +107,13 @@ def _write_dynamic_ad_payload(
         food_image_url=food_image_url,
         language=language,
     )
-    js = "window.LOGI_AD_DATA = " + json.dumps(payload, ensure_ascii=True, indent=2) + ";\n"
+    js = (
+        "window.LOGI_AD_DATA = "
+        + json.dumps(payload, ensure_ascii=True, indent=2)
+        + ";\nwindow.__LOGI_AD_DATA__ = window.LOGI_AD_DATA;\n"
+    )
     (assets_dir / "logi_ad_data.js").write_text(js, encoding="utf-8")
-    _inject_dynamic_scripts(hf_project_dir / "index.html", nested=False)
-    for composition in (hf_project_dir / "compositions").glob("*.html"):
-        _inject_dynamic_scripts(composition, nested=True)
+    _inject_dynamic_scripts(hf_project_dir / "index.html")
 
 
 def render_hyperframes_index(

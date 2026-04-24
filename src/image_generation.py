@@ -79,8 +79,20 @@ def estimate_text_tokens(text: str) -> int:
 
 
 def estimate_image_output_tokens(size: str, quality: str) -> int:
-    quality_key = "high" if quality == "auto" else quality
+    if quality == "auto":
+        quality_key = "high"
+    elif quality == "standard":
+        quality_key = "medium"
+    elif quality == "hd":
+        quality_key = "high"
+    else:
+        quality_key = quality
     size_key = "1024x1536" if size == "auto" else size
+    # DALL·E 3 sizes: map to nearest GPT Image bucket for rough cost hints.
+    if size_key == "1024x1792":
+        size_key = "1024x1536"
+    elif size_key == "1792x1024":
+        size_key = "1536x1024"
     token_table: dict[str, dict[str, int]] = {
         "low": {"1024x1024": 272, "1024x1536": 408, "1536x1024": 400},
         "medium": {"1024x1024": 1056, "1024x1536": 1584, "1536x1024": 1568},
@@ -254,15 +266,32 @@ def prepare_food_image(
         reraise=True,
     )
     def _generate() -> Any:
+        model_lower = str(config.model).lower()
         kwargs: dict[str, Any] = {
             "model": config.model,
             "prompt": prompt,
-            "n": variants,
             "size": config.size,
-            "quality": config.quality,
-            "output_format": config.output_format,
-            "response_format": "b64_json",
         }
+        if model_lower.startswith("dall-e-3"):
+            kwargs["n"] = 1
+            q = str(config.quality).lower()
+            if q in ("standard", "hd"):
+                kwargs["quality"] = q
+            elif q in ("high", "medium", "auto"):
+                kwargs["quality"] = "hd"
+            else:
+                kwargs["quality"] = "standard"
+            kwargs["response_format"] = "b64_json"
+            return client.images.generate(**kwargs)
+
+        if model_lower.startswith("dall-e"):
+            kwargs["n"] = variants
+            kwargs["response_format"] = "b64_json"
+            return client.images.generate(**kwargs)
+
+        kwargs["n"] = variants
+        kwargs["quality"] = config.quality
+        kwargs["output_format"] = config.output_format
         if config.output_format in {"jpeg", "webp"} and config.output_compression is not None:
             kwargs["output_compression"] = config.output_compression
         return client.images.generate(**kwargs)

@@ -29,12 +29,13 @@ openai:
   max_retries: 3
 
 image_generation:
-  model: gpt-image-2
+  # Tymczasowo DALL·E 3 — gpt-image-2 wymaga zweryfikowanej organizacji OpenAI.
+  model: dall-e-3
   prompt_version: food-photo-v1
-  size: 1024x1536
-  quality: high
-  output_format: webp
-  output_compression: 92
+  size: 1024x1792
+  quality: hd
+  output_format: png
+  output_compression: null
   variants: 1
   cache_dir: artifacts/image_cache
   max_cost_usd: 1.0
