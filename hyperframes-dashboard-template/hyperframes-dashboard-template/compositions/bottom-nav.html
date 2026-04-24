@@ -1,0 +1,306 @@
+<template id="dashboard-bottom-nav-template">
+  <div id="bottom-nav-root"
+       data-composition-id="dashboard-bottom-nav"
+       data-width="1080"
+       data-height="300">
+
+    <div id="nav-bg"
+         class="clip nav-bg"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="1"></div>
+
+    <div id="nav-home-icon"
+         class="clip nav-icon nav-home-icon active"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="10"></div>
+
+    <span id="nav-home-label"
+          class="clip nav-label nav-home-label active"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="11">Home</span>
+
+    <div id="nav-journal-icon"
+         class="clip nav-icon nav-journal-icon"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="12"></div>
+
+    <span id="nav-journal-label"
+          class="clip nav-label nav-journal-label"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="13">Journal</span>
+
+    <div id="nav-index-icon"
+         class="clip nav-icon nav-index-icon"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="14"></div>
+
+    <span id="nav-index-label"
+          class="clip nav-label nav-index-label"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="15">Index</span>
+
+    <div id="nav-trends-icon"
+         class="clip nav-icon nav-trends-icon"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="16"></div>
+
+    <span id="nav-trends-label"
+          class="clip nav-label nav-trends-label"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="17">Trends</span>
+
+    <div id="nav-plus-ring"
+         class="clip nav-plus-ring"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="30"></div>
+
+    <div id="nav-plus-circle"
+         class="clip nav-plus-circle"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="31"></div>
+
+    <span id="nav-plus-symbol"
+          class="clip nav-plus-symbol"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="32">+</span>
+
+    <style>
+      #bottom-nav-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 300px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #bottom-nav-root * { box-sizing: border-box; }
+      #bottom-nav-root .clip { position: absolute; }
+
+      #nav-bg {
+        left: 0;
+        top: 24px;
+        width: 1080px;
+        height: 276px;
+        border-radius: 64px 64px 0 0;
+        background: #ffffff;
+        box-shadow: 0 -22px 55px rgba(0, 0, 0, 0.07);
+      }
+
+      .nav-icon {
+        width: 66px;
+        height: 66px;
+        color: var(--text);
+      }
+      .nav-label {
+        top: 202px;
+        width: 140px;
+        text-align: center;
+        color: var(--text);
+        font-size: 31px;
+        line-height: 1;
+        font-weight: 440;
+      }
+      .nav-icon.active,
+      .nav-label.active { color: var(--green); }
+
+      #nav-home-icon { left: 104px; top: 88px; }
+      #nav-home-label { left: 65px; }
+      #nav-journal-icon { left: 288px; top: 88px; }
+      #nav-journal-label { left: 251px; }
+      #nav-index-icon { left: 726px; top: 88px; }
+      #nav-index-label { left: 688px; }
+      #nav-trends-icon { left: 920px; top: 88px; }
+      #nav-trends-label { left: 878px; }
+
+      .nav-home-icon::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 26px;
+        width: 54px;
+        height: 38px;
+        border-radius: 10px 10px 8px 8px;
+        background: currentColor;
+      }
+      .nav-home-icon::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 6px;
+        width: 46px;
+        height: 46px;
+        border-radius: 8px;
+        background: currentColor;
+        transform: rotate(45deg);
+      }
+
+      .nav-journal-icon {
+        border: 7px solid currentColor;
+        border-radius: 9px;
+      }
+      .nav-journal-icon::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: -14px;
+        width: 9px;
+        height: 22px;
+        border-radius: 5px;
+        background: currentColor;
+        box-shadow: 30px 0 0 currentColor;
+      }
+      .nav-journal-icon::after {
+        content: "";
+        position: absolute;
+        left: 17px;
+        top: 27px;
+        width: 27px;
+        height: 15px;
+        border-left: 7px solid currentColor;
+        border-bottom: 7px solid currentColor;
+        transform: rotate(-45deg);
+        border-radius: 2px;
+      }
+
+      .nav-index-icon {
+        border: 7px solid currentColor;
+        border-radius: 9px;
+      }
+      .nav-index-icon::before {
+        content: "";
+        position: absolute;
+        left: 13px;
+        top: 13px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 16px 0 currentColor, 0 32px 0 currentColor;
+      }
+      .nav-index-icon::after {
+        content: "";
+        position: absolute;
+        left: 30px;
+        top: 14px;
+        width: 20px;
+        height: 6px;
+        border-radius: 5px;
+        background: currentColor;
+        box-shadow: 0 16px 0 currentColor, 0 32px 0 currentColor;
+      }
+
+      .nav-trends-icon::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        bottom: 7px;
+        width: 60px;
+        height: 42px;
+        border-left: 7px solid currentColor;
+        border-bottom: 7px solid currentColor;
+        border-radius: 4px;
+      }
+      .nav-trends-icon::after {
+        content: "";
+        position: absolute;
+        left: 17px;
+        top: 25px;
+        width: 43px;
+        height: 24px;
+        border-top: 7px solid currentColor;
+        border-right: 7px solid currentColor;
+        transform: skew(-31deg) rotate(-6deg);
+        border-radius: 5px;
+      }
+
+      #nav-plus-ring {
+        left: 432px;
+        top: -48px;
+        width: 218px;
+        height: 218px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+      }
+
+      #nav-plus-circle {
+        left: 456px;
+        top: -24px;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      #nav-plus-symbol {
+        left: 456px;
+        top: -32px;
+        width: 170px;
+        height: 170px;
+        color: #ffffff;
+        text-align: center;
+        font-size: 88px;
+        line-height: 162px;
+        font-weight: 300;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#nav-bg",
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 0.50, ease: "power3.out" },
+        0
+      );
+      tl.fromTo(["#nav-home-icon", "#nav-home-label", "#nav-journal-icon", "#nav-journal-label", "#nav-index-icon", "#nav-index-label", "#nav-trends-icon", "#nav-trends-label"],
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.32, stagger: 0.025, ease: "power3.out" },
+        0.12
+      );
+      tl.fromTo(["#nav-plus-ring", "#nav-plus-circle"],
+        { opacity: 0, scale: 0.45, y: 28 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.54, stagger: 0.03, ease: "back.out(1.7)" },
+        0.18
+      );
+      tl.fromTo("#nav-plus-symbol",
+        { opacity: 0, scale: 0.45, rotate: -45 },
+        { opacity: 1, scale: 1, rotate: 0, duration: 0.54, ease: "back.out(1.7)" },
+        0.26
+      );
+      tl.to("#nav-plus-circle", { scale: 1.06, duration: 0.18, ease: "power2.out", transformOrigin: "center center" }, 1.12);
+      tl.to("#nav-plus-symbol", { scale: 1.06, duration: 0.18, ease: "power2.out", transformOrigin: "center center" }, 1.12);
+      tl.to("#nav-plus-circle", { scale: 1, duration: 0.28, ease: "power2.out", transformOrigin: "center center" }, 1.30);
+      tl.to("#nav-plus-symbol", { scale: 1, duration: 0.28, ease: "power2.out", transformOrigin: "center center" }, 1.30);
+      tl.set({}, {}, 8.5);
+      window.__timelines["dashboard-bottom-nav"] = tl;
+    </script>
+  </div>
+</template>

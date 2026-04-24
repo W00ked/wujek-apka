@@ -23,15 +23,13 @@ def apply_logi_markup_transforms(template_source: str) -> str:
                 </div>"""
     ingredient_loop = """                {% for ingredient in ingredients %}
                 <div class="ingredient-item" data-motion-target="ingredient-row" data-ingredient-name="{{ ingredient.name }}" data-ingredient-index="{{ loop.index0 }}">
-                    <div
-                        class="ing-thumb"
-                        data-motion-target="ingredient-thumb"
+                    <div class="ing-thumb" data-motion-target="ingredient-thumb">
                         {% if ingredient.thumbnail_url %}
-                        style="background-image: url('{{ ingredient.thumbnail_url }}');"
+                        <img src="{{ ingredient.thumbnail_url }}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer-when-downgrade" />
                         {% else %}
-                        style="background-image: url('{{ placeholder_asset }}');"
+                        <img src="{{ placeholder_asset }}" alt="" loading="eager" decoding="async" />
                         {% endif %}
-                    ></div>
+                    </div>
                     <div class="ing-info">
                         <div class="ing-name" data-motion-target="ingredient-name">{{ ingredient.name }}</div>
                         {% if ingredient.category %}
@@ -64,16 +62,39 @@ def apply_logi_markup_transforms(template_source: str) -> str:
                     </span>
                     {% endfor %}"""
     motion_css = """
-        .video-canvas { position: relative; transform-origin: top center; will-change: transform, filter; }
+        /* filter w will-change + background na dzieciach przy scrollu transform = miganie w Chrome/HyperFrames */
+        .video-canvas {
+            position: relative;
+            transform-origin: top center;
+            will-change: transform;
+        }
         .motion-section,
-        [data-motion-target],
         [data-motion-group] {
-            will-change: transform, opacity, filter;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform-origin: center center;
+        }
+        [data-motion-target]:not(.ing-thumb) {
+            will-change: transform, opacity;
             backface-visibility: hidden;
             transform-origin: center center;
         }
         .motion-section { isolation: isolate; }
         .gl-box, .cal-box, .ingredient-item, .insight-text, .badge { transform-origin: center center; }
+        .ing-thumb {
+            overflow: hidden;
+            contain: strict;
+            background-color: var(--color-bg);
+        }
+        .ing-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
     """
 
     transformed = template_source
@@ -210,7 +231,7 @@ def inject_hyperframes_wrapper_and_scripts(transformed: str) -> str:
       const maxY = Math.max(0, (canvas ? canvas.scrollHeight : 0) - viewport);
       const dur = {{ hf_gsap_duration }};
       if (canvas) {
-        tl.to(canvas, { y: -maxY, duration: dur, ease: "none" }, 0);
+        tl.to(canvas, { y: -maxY, duration: dur, ease: "none", force3D: true }, 0);
       }
       window.__timelines["{{ hf_composition_id }}"] = tl;
     </script>

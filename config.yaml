@@ -97,7 +97,10 @@ playwright:
 # Lokalny projekt kompozycji (hyperframes init). Kopiowany do artifacts/<run>/hf_project/ przy każdym uruchomieniu.
 hyperframes:
   project_template_dir: hyperframes_composition
-  npx_command: npx
+  # Pełna ścieżka: w terminalu Cursor pierwszy `node`/`npx` z PATH bywa z Cursora i npm nie działa.
+  npx_command: "C:/Program Files/nodejs/npx.cmd"
+  # Min. 0.4.17 — na Windows wykrywa FFmpeg (`where`); starsze wersje z `which` zawsze zgłaszają brak FFmpeg.
+  cli_package: hyperframes@0.4.17
   render_timeout_sec: 3600
   quality: standard
   quiet: true

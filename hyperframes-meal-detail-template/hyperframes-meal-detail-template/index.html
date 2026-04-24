@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HyperFrames Meal Detail Composition</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    :root {
+      --canvas: #f3f4f2;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #737b8a;
+      --line: #e2e7e8;
+      --green: #4a9c6a;
+      --green-dark: #2f8156;
+      --green-soft: #eaf4ee;
+      --red: #ed001c;
+      --red-soft: #f8e6e8;
+      --radius-xl: 52px;
+      --radius-lg: 40px;
+      --radius-md: 24px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: var(--canvas); }
+
+    #main {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--canvas);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    #meal-content-rail {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 7300px;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .composition-slot {
+      position: absolute;
+      left: 0;
+      width: 1080px;
+      overflow: visible;
+      opacity: 0;
+      transform-origin: center top;
+    }
+
+    #hero-slot { top: 0; height: 1720px; }
+    #nutrition-slot { top: 1680px; height: 1700px; }
+    #ingredients-slot { top: 3260px; height: 2500px; }
+    #insights-slot { top: 5750px; height: 1760px; }
+
+    #top-shell-slot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 320px;
+      opacity: 1;
+      overflow: visible;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="main"
+       data-composition-id="dashboard"
+       data-start="0"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="meal-content-rail">
+      <div id="hero-slot"
+           class="clip composition-slot hero-slot"
+           data-composition-id="meal-hero"
+           data-composition-src="./compositions/hero.html"
+           data-start="0"
+           data-track-index="10"></div>
+
+      <div id="nutrition-slot"
+           class="clip composition-slot nutrition-slot"
+           data-composition-id="meal-nutrition-label"
+           data-composition-src="./compositions/nutrition-label.html"
+           data-start="0.20"
+           data-track-index="11"></div>
+
+      <div id="ingredients-slot"
+           class="clip composition-slot ingredients-slot"
+           data-composition-id="meal-ingredients"
+           data-composition-src="./compositions/ingredients-found.html"
+           data-start="0.40"
+           data-track-index="12"></div>
+
+      <div id="insights-slot"
+           class="clip composition-slot insights-slot"
+           data-composition-id="meal-insights"
+           data-composition-src="./compositions/meal-insights.html"
+           data-start="0.60"
+           data-track-index="13"></div>
+    </div>
+
+    <div id="top-shell-slot"
+         class="clip composition-slot top-shell-slot"
+         data-composition-id="meal-top-shell"
+         data-composition-src="./compositions/top-shell.html"
+         data-start="0"
+         data-track-index="90"></div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        tl.set("#meal-content-rail", { y: 0 }, 0);
+
+        tl.fromTo("#hero-slot",
+          { opacity: 0, y: 0, scale: 1.012 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.64, ease: "power3.out" },
+          0
+        );
+
+        tl.fromTo("#nutrition-slot",
+          { opacity: 0, y: 42, scale: 0.99 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+          0.22
+        );
+
+        tl.fromTo("#ingredients-slot",
+          { opacity: 0, y: 44, scale: 0.99 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+          0.45
+        );
+
+        tl.fromTo("#insights-slot",
+          { opacity: 0, y: 44, scale: 0.99 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+          0.70
+        );
+
+        tl.fromTo("#top-shell-slot",
+          { opacity: 0, y: -18 },
+          { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" },
+          0.05
+        );
+
+        tl.to("#meal-content-rail", { y: -1320, duration: 1.10, ease: "power2.inOut" }, 1.55);
+        tl.to("#meal-content-rail", { y: -2960, duration: 1.18, ease: "power2.inOut" }, 3.50);
+        tl.to("#meal-content-rail", { y: -4700, duration: 1.18, ease: "power2.inOut" }, 5.28);
+        tl.to("#meal-content-rail", { y: -5350, duration: 0.96, ease: "power2.inOut" }, 7.05);
+
+        tl.set({}, {}, 9);
+        window.__timelines["dashboard"] = tl;
+      })();
+    </script>
+  </div>
+</body>
+</html>

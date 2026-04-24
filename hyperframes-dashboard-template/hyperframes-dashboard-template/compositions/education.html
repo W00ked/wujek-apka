@@ -1,0 +1,231 @@
+<template id="dashboard-education-template">
+  <div id="education-root"
+       data-composition-id="dashboard-education"
+       data-width="1080"
+       data-height="760">
+
+    <div id="education-card-bg"
+         class="clip education-card-bg"
+         data-start="0"
+         data-duration="8"
+         data-track-index="1"></div>
+
+    <span id="education-title"
+          class="clip education-title"
+          data-start="0"
+          data-duration="8"
+          data-track-index="2">Education</span>
+
+    <div id="education-image-1"
+         class="clip education-image education-image-1"
+         data-start="0"
+         data-duration="8"
+         data-track-index="3"></div>
+
+    <span id="education-article-title-1"
+          class="clip education-article-title education-article-title-1"
+          data-start="0"
+          data-duration="8"
+          data-track-index="10">What Is Insulin Resistance,
+Really?</span>
+
+    <span id="education-see-more-1"
+          class="clip education-see-more education-see-more-1"
+          data-start="0"
+          data-duration="8"
+          data-track-index="11">See more</span>
+
+    <span id="education-arrow-1"
+          class="clip education-arrow education-arrow-1"
+          data-start="0"
+          data-duration="8"
+          data-track-index="12">›</span>
+
+    <div id="education-image-2"
+         class="clip education-image education-image-2"
+         data-start="0"
+         data-duration="8"
+         data-track-index="4"></div>
+
+    <span id="education-article-title-2"
+          class="clip education-article-title education-article-title-2"
+          data-start="0"
+          data-duration="8"
+          data-track-index="13">Why Insulin Resistance
+Develops — Causes &
+Factors</span>
+
+    <span id="education-see-more-2"
+          class="clip education-see-more education-see-more-2"
+          data-start="0"
+          data-duration="8"
+          data-track-index="14">See more</span>
+
+    <span id="education-arrow-2"
+          class="clip education-arrow education-arrow-2"
+          data-start="0"
+          data-duration="8"
+          data-track-index="15">›</span>
+
+    <style>
+      #education-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 760px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #education-root * { box-sizing: border-box; }
+      #education-root .clip { position: absolute; }
+
+      #education-card-bg {
+        left: 42px;
+        top: 0;
+        width: 996px;
+        height: 690px;
+        border-radius: var(--radius-xl);
+        background: var(--card);
+        overflow: hidden;
+      }
+
+      #education-title {
+        left: 86px;
+        top: 64px;
+        color: #34885b;
+        font-size: 42px;
+        line-height: 1;
+        font-weight: 760;
+        letter-spacing: -0.4px;
+      }
+
+      .education-image {
+        top: 134px;
+        height: 330px;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      #education-image-1 {
+        left: 86px;
+        width: 592px;
+        background:
+          radial-gradient(circle at 29% 53%, #ec8fb5 0 42px, transparent 43px),
+          radial-gradient(circle at 52% 51%, #79c985 0 42px, transparent 43px),
+          radial-gradient(circle at 42% 30%, #f6d85a 0 42px, transparent 43px),
+          radial-gradient(circle at 25% 27%, #66d0d6 0 42px, transparent 43px),
+          radial-gradient(circle at 58% 75%, #71bf68 0 42px, transparent 43px),
+          linear-gradient(135deg, #d4eee8 0%, #f3f0d8 100%);
+      }
+      #education-image-1::after {
+        content: "";
+        position: absolute;
+        left: -70px;
+        top: -50px;
+        width: 760px;
+        height: 130px;
+        background: rgba(255,255,255,0.34);
+        transform: rotate(-22deg);
+      }
+
+      #education-image-2 {
+        left: 722px;
+        width: 362px;
+        background:
+          linear-gradient(168deg, transparent 0 51%, #4aa06c 51% 100%),
+          repeating-linear-gradient(0deg, #ffffff 0 28px, #e7ebef 28px 30px),
+          linear-gradient(135deg, #f8faf9, #e8e7df);
+      }
+      #education-image-2::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 362px;
+        height: 110px;
+        background: #4aa06c;
+        clip-path: polygon(0 72%, 18% 64%, 34% 54%, 48% 50%, 63% 36%, 78% 30%, 100% 12%, 100% 100%, 0 100%);
+      }
+
+      .education-article-title {
+        top: 500px;
+        color: var(--text);
+        font-size: 42px;
+        line-height: 1.32;
+        font-weight: 500;
+        letter-spacing: -0.6px;
+        white-space: pre-line;
+      }
+      #education-article-title-1 { left: 86px; width: 570px; }
+      #education-article-title-2 { left: 722px; width: 410px; }
+
+      .education-see-more {
+        top: 642px;
+        color: #338a5b;
+        font-size: 41px;
+        line-height: 1;
+        font-weight: 520;
+      }
+      #education-see-more-1 { left: 86px; }
+      #education-see-more-2 { left: 722px; top: 648px; }
+
+      .education-arrow {
+        top: 625px;
+        color: #338a5b;
+        font-size: 76px;
+        line-height: 1;
+        font-weight: 420;
+      }
+      #education-arrow-1 { left: 310px; }
+      #education-arrow-2 { left: 946px; top: 631px; }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#education-card-bg",
+        { opacity: 0, y: 34, scale: 0.988 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" },
+        0
+      );
+      tl.fromTo("#education-title",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo(["#education-image-1", "#education-article-title-1", "#education-see-more-1", "#education-arrow-1"],
+        { opacity: 0, y: 26 },
+        { opacity: 1, y: 0, duration: 0.42, stagger: 0.06, ease: "power3.out" },
+        0.22
+      );
+      tl.fromTo(["#education-image-2", "#education-article-title-2", "#education-see-more-2", "#education-arrow-2"],
+        { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.45, stagger: 0.05, ease: "power3.out" },
+        0.38
+      );
+      tl.to(["#education-image-1", "#education-image-2"],
+        { x: -18, duration: 1.6, ease: "power1.inOut" },
+        2.80
+      );
+      tl.to(["#education-arrow-1", "#education-arrow-2"], { x: 8, duration: 0.24, ease: "power2.out" }, 1.40);
+      tl.to(["#education-arrow-1", "#education-arrow-2"], { x: 0, duration: 0.30, ease: "power2.out" }, 1.64);
+      tl.set({}, {}, 8);
+      window.__timelines["dashboard-education"] = tl;
+    </script>
+  </div>
+</template>

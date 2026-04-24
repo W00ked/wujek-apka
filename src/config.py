@@ -121,6 +121,8 @@ class HyperFramesConfig(BaseModel):
 
     project_template_dir: Path = Path("hyperframes_composition")
     npx_command: str = "npx"
+    # 0.4.17+ resolves FFmpeg on Windows via `where`; older npx cache used `which` and always failed.
+    cli_package: str = "hyperframes@0.4.17"
     render_timeout_sec: float = 3600.0
     quality: Literal["draft", "standard", "high"] = "standard"
     quiet: bool = True

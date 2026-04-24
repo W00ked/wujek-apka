@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vieo.local/schemas/logi-nutrition-values.schema.json",
+  "title": "LOGI nutrition block",
+  "description": "Wartości na 100 g (nutritional_reference) lub przeskalowane do wagi porcji (nutritional_actual). API może pominąć pola lub zwrócić null. Pole sugars_total jest aliasem używanym przez niektóre odpowiedzi (vieo mapuje je na sugars).",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "calories": { "type": ["number", "null"] },
+    "protein": { "type": ["number", "null"] },
+    "fat": { "type": ["number", "null"] },
+    "carbohydrates": { "type": ["number", "null"] },
+    "saturated_fat": { "type": ["number", "null"] },
+    "fiber": { "type": ["number", "null"] },
+    "glycemic_index": { "type": ["number", "null"] },
+    "glycemic_load": { "type": ["number", "null"] },
+    "sugars": { "type": ["number", "null"] },
+    "sugars_total": { "type": ["number", "null"] }
+  }
+}

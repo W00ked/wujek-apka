@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vieo.local/schemas/logi-scan-response.schema.json",
+  "title": "LOGI POST /demo/scan — odpowiedź JSON (HTTP 200)",
+  "description": "Synchroniczna odpowiedź po zakończeniu analizy AI. Typowy czas 7–20 s; timeout klienta min. 60 s. Przy success: false pole data może być niepełne — schemat jest zgodny z dokumentacją wewnętrzną API oraz z modelem ScanResponse / MealScan w vieo (src/models/scan.py). Nie opisuje treści body przy HTTP 4xx/5xx.",
+  "type": "object",
+  "required": ["success", "scanId", "data"],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "true gdy analiza zakończona poprawnie; przy false vieo kończy się błędem po walidacji."
+    },
+    "scanId": {
+      "type": "string",
+      "description": "Identyfikator skanu, np. demo_1713456789012_a3b2c1."
+    },
+    "duration": {
+      "type": ["integer", "null"],
+      "description": "Czas przetwarzania w milisekundach (jeśli zwracany przez API)."
+    },
+    "processing_mode": {
+      "type": ["string", "null"],
+      "description": "Np. hybrid."
+    },
+    "data": {
+      "$ref": "#/definitions/ScanData"
+    }
+  },
+  "definitions": {
+    "StringOrStringList": {
+      "description": "LOGI bywa elastyczne: pojedynczy string, tablica stringów lub null — vieo normalizuje do listy.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } },
+        { "type": "null" }
+      ]
+    },
+    "Ingredient": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string", "description": "Nazwa składnika." },
+        "description": { "type": ["string", "null"], "description": "Opis / ciekawostka." },
+        "weight": {
+          "type": ["number", "null"],
+          "description": "Masa porcji w gramach."
+        },
+        "category": { "type": ["string", "null"], "description": "Np. Other." },
+        "nutritional_reference": {
+          "description": "Wartości odżywcze na 100 g.",
+          "allOf": [{ "$ref": "./logi-nutrition-values.schema.json" }]
+        },
+        "nutritional_actual": {
+          "description": "Wartości przeskalowane do wagi składnika (weight).",
+          "allOf": [{ "$ref": "./logi-nutrition-values.schema.json" }]
+        },
+        "match_confidence": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Pewność dopasowania 0–1."
+        },
+        "thumbnail_url": {
+          "type": ["string", "null"],
+          "description": "URL miniatury składnika, jeśli dostępny."
+        }
+      }
+    },
+    "ScanData": {
+      "type": "object",
+      "description": "Ładunek analityczny posiłku.",
+      "additionalProperties": true,
+      "properties": {
+        "mealName": {
+          "type": "string",
+          "description": "Nazwa posiłku."
+        },
+        "mealDescription": {
+          "type": ["string", "null"],
+          "description": "Opis / kontekst posiłku."
+        },
+        "ingredients": {
+          "type": "array",
+          "description": "Lista rozpoznanych składników (vieo wymaga co najmniej jednego przy success: true).",
+          "items": { "$ref": "#/definitions/Ingredient" }
+        },
+        "potentialHealthRisks": {
+          "description": "Ryzyka zdrowotne — tablica lub pojedynczy string.",
+          "allOf": [{ "$ref": "#/definitions/StringOrStringList" }]
+        },
+        "nutritionistsOpinion": {
+          "description": "Komentarze dietetyka — tablica lub pojedynczy string.",
+          "allOf": [{ "$ref": "#/definitions/StringOrStringList" }]
+        }
+      }
+    }
+  }
+}

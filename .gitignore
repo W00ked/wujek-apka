@@ -9,5 +9,6 @@ playwright-report/
 *.pyo
 *.pyd
 .env
+hyperframes_composition/_*.mp4
 *.egg-info/
 OpenCode Desktop Installer.exe

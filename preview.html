@@ -11,23 +11,23 @@
     <style>
         /* TOKENY CSS */
         :root {
-            --color-bg: #F4F5F4;
+            --color-bg: #eef2ee;
             --color-surface: #FFFFFF;
             --color-primary: #479655;
-            --color-success: #53A451;
-            --color-text-main: #1A1D1A;
-            --color-text-muted: #7A807C;
-            --color-border: #E8EAE9;
+            --color-success: #3d8f47;
+            --color-text-main: #0f1412;
+            --color-text-muted: #5c6560;
+            --color-border: #dce3de;
             --color-risk-bg: #FDEBEB;
             --color-risk-text: #BA4549;
+            --color-accent-glow: rgba(71, 150, 85, 0.35);
 
-            --font-family: 'Plus Jakarta Sans', sans-serif;
-            --text-huge: 800 110px var(--font-family);
-            --text-h1: 700 56px var(--font-family);
-            --text-h2: 700 40px var(--font-family);
-            --text-body: 600 32px var(--font-family);
-            --text-body-reg: 500 30px var(--font-family);
-            --text-small: 500 24px var(--font-family);
+            --text-huge: 800 110px 'Plus Jakarta Sans', sans-serif;
+            --text-h1: 700 56px 'Plus Jakarta Sans', sans-serif;
+            --text-h2: 700 40px 'Plus Jakarta Sans', sans-serif;
+            --text-body: 600 32px 'Plus Jakarta Sans', sans-serif;
+            --text-body-reg: 500 30px 'Plus Jakarta Sans', sans-serif;
+            --text-small: 500 24px 'Plus Jakarta Sans', sans-serif;
             
             --radius-card: 48px;
             --radius-box: 24px;
@@ -39,12 +39,12 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            width: 1080px; 
+            width: 1080px;
             min-height: 1920px;
-            background-color: var(--color-bg);
-            font-family: var(--font-family);
+            background: radial-gradient(120% 80% at 50% -10%, #ffffff 0%, var(--color-bg) 45%, #e2ebe4 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--color-text-main);
-            padding: 80px var(--spacing-main) 160px var(--spacing-main); 
+            padding: 80px var(--spacing-main) 160px var(--spacing-main);
         }
 
         .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px; padding: 0 16px; }
@@ -53,14 +53,56 @@
         .greeting-text { font: var(--text-h2); color: var(--color-text-main); }
 
         .meal-intro { margin-bottom: 40px; padding: 0 16px; }
-        .meal-title { font: var(--text-h1); margin-bottom: 16px; line-height: 1.2; color: var(--color-text-main); }
+        .meal-title {
+            font: var(--text-h1);
+            margin-bottom: 16px;
+            line-height: 1.15;
+            color: var(--color-text-main);
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 24px rgba(255, 255, 255, 0.9);
+        }
         .meal-desc { font: var(--text-body-reg); color: var(--color-text-muted); line-height: 1.4; }
 
-        .card { background-color: var(--color-surface); border-radius: var(--radius-card); padding: var(--spacing-card); margin-bottom: var(--spacing-main); box-shadow: 0 8px 32px rgba(0,0,0,0.02); }
+        .card {
+            position: relative;
+            background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+            border-radius: var(--radius-card);
+            padding: var(--spacing-card);
+            margin-bottom: var(--spacing-main);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow:
+                0 4px 6px rgba(15, 20, 18, 0.04),
+                0 24px 48px rgba(71, 150, 85, 0.08),
+                0 0 0 1px rgba(71, 150, 85, 0.06);
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            left: 48px;
+            right: 48px;
+            top: 0;
+            height: 5px;
+            border-radius: 0 0 8px 8px;
+            background: linear-gradient(90deg, var(--color-success), #6bc76f, var(--color-primary));
+            opacity: 0.9;
+        }
         .card-header { font: var(--text-h2); color: var(--color-primary); margin-bottom: 40px; }
 
         .top-stats { display: flex; align-items: stretch; margin-bottom: 48px; }
-        .gl-box { flex: 1; background-color: var(--color-success); border-radius: var(--radius-box); padding: 32px 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #FFFFFF; text-align: center; min-height: 200px; }
+        .gl-box {
+            flex: 1;
+            background: linear-gradient(145deg, #5cb85c 0%, var(--color-success) 45%, #2d7a3e 100%);
+            border-radius: var(--radius-box);
+            padding: 32px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            min-height: 200px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 12px 28px var(--color-accent-glow);
+        }
         .gl-label { font: var(--text-body-reg); margin-bottom: 8px; white-space: nowrap; }
         .gl-value { font: var(--text-huge); line-height: 1; white-space: nowrap; }
         
@@ -76,7 +118,22 @@
 
         .ingredient-item { display: flex; gap: 32px; padding: 32px 0; border-bottom: 2px solid var(--color-border); }
         .ingredient-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .ing-thumb { width: 120px; height: 120px; background-color: var(--color-bg); border-radius: var(--radius-box); background-size: cover; background-position: center; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .ing-thumb {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius-box);
+            flex-shrink: 0;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 24px rgba(15, 20, 18, 0.12), 0 0 0 1px rgba(71, 150, 85, 0.15);
+            overflow: hidden;
+        }
+        .ing-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateZ(0);
+        }
         .ing-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .ing-name { font: var(--text-h2); color: var(--color-text-main); margin-bottom: 8px; }
         .ing-cat { font: var(--text-small); color: var(--color-text-muted); margin-bottom: 20px; }
@@ -152,7 +209,7 @@
             
             
             <div class="ingredient-item">
-                <div class="ing-thumb" style="background-image: url('https://storage.googleapis.com/logi-ingredient-images/thumbnails/chicken_breast_spicy_grilled_thumb.webp');"></div>
+                <div class="ing-thumb"><img src="https://storage.googleapis.com/logi-ingredient-images/thumbnails/chicken_breast_spicy_grilled_thumb.webp" alt="" loading="eager" decoding="async" /></div>
                 <div class="ing-info">
                     <div class="ing-name">Grilled chicken breast</div>
                     <div class="ing-cat">Meat</div>
@@ -171,7 +228,7 @@
             </div>
             
             <div class="ingredient-item">
-                <div class="ing-thumb" style="background-image: url('https://storage.googleapis.com/logi-ingredient-images/thumbnails/romaine_lettuce_thumb.webp');"></div>
+                <div class="ing-thumb"><img src="https://storage.googleapis.com/logi-ingredient-images/thumbnails/romaine_lettuce_thumb.webp" alt="" loading="eager" decoding="async" /></div>
                 <div class="ing-info">
                     <div class="ing-name">Romaine lettuce</div>
                     <div class="ing-cat">Vegetables</div>
@@ -190,7 +247,7 @@
             </div>
             
             <div class="ingredient-item">
-                <div class="ing-thumb" style="background-image: url('https://storage.googleapis.com/logi-ingredient-images/thumbnails/extra_virgin_olive_oil_thumb.webp');"></div>
+                <div class="ing-thumb"><img src="https://storage.googleapis.com/logi-ingredient-images/thumbnails/extra_virgin_olive_oil_thumb.webp" alt="" loading="eager" decoding="async" /></div>
                 <div class="ing-info">
                     <div class="ing-name">Extra virgin olive oil</div>
                     <div class="ing-cat">Other</div>
@@ -209,7 +266,7 @@
             </div>
             
             <div class="ingredient-item">
-                <div class="ing-thumb" style="background-image: url('https://storage.googleapis.com/logi-ingredient-images/thumbnails/cucumber_thumb.webp');"></div>
+                <div class="ing-thumb"><img src="https://storage.googleapis.com/logi-ingredient-images/thumbnails/cucumber_thumb.webp" alt="" loading="eager" decoding="async" /></div>
                 <div class="ing-info">
                     <div class="ing-name">Cucumber</div>
                     <div class="ing-cat">Vegetables</div>
@@ -228,7 +285,7 @@
             </div>
             
             <div class="ingredient-item">
-                <div class="ing-thumb" style="background-image: url('https://storage.googleapis.com/logi-ingredient-images/thumbnails/cherry_tomatoes_thumb.webp');"></div>
+                <div class="ing-thumb"><img src="https://storage.googleapis.com/logi-ingredient-images/thumbnails/cherry_tomatoes_thumb.webp" alt="" loading="eager" decoding="async" /></div>
                 <div class="ing-info">
                     <div class="ing-name">Cherry tomatoes</div>
                     <div class="ing-cat">Vegetables</div>

@@ -26,7 +26,7 @@ def run_hyperframes_render(
     cmd = [
         settings.hyperframes.npx_command,
         "--yes",
-        "hyperframes",
+        settings.hyperframes.cli_package,
         "render",
         str(hf_project_dir),
         "--output",
@@ -43,6 +43,10 @@ def run_hyperframes_render(
     cmd.extend(settings.hyperframes.extra_args)
 
     env = os.environ.copy()
+    ffmpeg_path = Path(settings.ffmpeg.binary)
+    if ffmpeg_path.is_file():
+        bin_dir = str(ffmpeg_path.parent.resolve())
+        env["PATH"] = bin_dir + os.pathsep + env.get("PATH", "")
     if settings.hyperframes.node_options:
         env["NODE_OPTIONS"] = settings.hyperframes.node_options
 

@@ -1,0 +1,165 @@
+<template id="dashboard-report-template">
+  <div id="report-root"
+       data-composition-id="dashboard-report"
+       data-width="1080"
+       data-height="380">
+
+    <div id="report-card-bg"
+         class="clip report-card-bg"
+         data-start="0"
+         data-duration="8"
+         data-track-index="1"></div>
+
+    <div id="report-card-shine"
+         class="clip report-card-shine"
+         data-start="0"
+         data-duration="8"
+         data-track-index="2"></div>
+
+    <span id="report-title"
+          class="clip report-title"
+          data-start="0"
+          data-duration="8"
+          data-track-index="10">PDF Report</span>
+
+    <span id="report-description"
+          class="clip report-description"
+          data-start="0"
+          data-duration="8"
+          data-track-index="11">Export your meals as a clear PDF for your doctor
+or dietitian — nutrition and glycemic data in one
+place.</span>
+
+    <div id="report-share-circle"
+         class="clip report-share-circle"
+         data-start="0"
+         data-duration="8"
+         data-track-index="30"></div>
+
+    <span id="report-share-icon"
+          class="clip report-share-icon"
+          data-start="0"
+          data-duration="8"
+          data-track-index="31">⇧</span>
+
+    <style>
+      #report-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 380px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #report-root * { box-sizing: border-box; }
+      #report-root .clip { position: absolute; }
+
+      #report-card-bg {
+        left: 42px;
+        top: 0;
+        width: 996px;
+        height: 350px;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(155deg, #44996a 0%, #2a744f 100%);
+        overflow: hidden;
+      }
+
+      #report-card-shine {
+        left: 104px;
+        top: -40px;
+        width: 360px;
+        height: 430px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0));
+        opacity: 0.22;
+        transform: rotate(18deg);
+      }
+
+      #report-title {
+        left: 86px;
+        top: 74px;
+        color: #ffffff;
+        font-size: 53px;
+        line-height: 1;
+        font-weight: 520;
+        letter-spacing: -0.7px;
+      }
+
+      #report-description {
+        left: 86px;
+        top: 184px;
+        width: 820px;
+        color: #ffffff;
+        font-size: 36px;
+        line-height: 1.32;
+        font-weight: 450;
+        letter-spacing: -0.2px;
+        white-space: pre-line;
+      }
+
+      #report-share-circle {
+        left: 886px;
+        top: 49px;
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.93);
+      }
+
+      #report-share-icon {
+        left: 914px;
+        top: 63px;
+        width: 58px;
+        height: 70px;
+        text-align: center;
+        color: #737986;
+        font-size: 63px;
+        line-height: 1;
+        font-weight: 600;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#report-card-bg",
+        { opacity: 0, y: 38, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+        0
+      );
+      tl.fromTo("#report-card-shine",
+        { opacity: 0, x: -90 },
+        { opacity: 0.22, x: 0, duration: 0.72, ease: "power2.out" },
+        0.16
+      );
+      tl.fromTo(["#report-title", "#report-description"],
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.40, stagger: 0.08, ease: "power3.out" },
+        0.18
+      );
+      tl.fromTo(["#report-share-circle", "#report-share-icon"],
+        { opacity: 0, scale: 0.84, y: 10 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.42, stagger: 0.035, ease: "back.out(1.6)" },
+        0.34
+      );
+      tl.to("#report-card-shine", { x: 520, duration: 1.0, ease: "power2.inOut" }, 1.65);
+      tl.set({}, {}, 8);
+      window.__timelines["dashboard-report"] = tl;
+    </script>
+  </div>
+</template>

@@ -1,0 +1,128 @@
+<template id="dashboard-header-template">
+  <div id="header-root"
+       data-composition-id="dashboard-header"
+       data-width="1080"
+       data-height="290">
+
+    <div id="header-avatar"
+         class="clip header-avatar"
+         data-start="0"
+         data-duration="8"
+         data-track-index="1"></div>
+
+    <span id="header-greeting"
+          class="clip header-greeting"
+          data-start="0"
+          data-duration="8"
+          data-track-index="2">Hello, Wiktor Dąbrówka</span>
+
+    <span id="header-date"
+          class="clip header-date"
+          data-start="0"
+          data-duration="8"
+          data-track-index="3">24 April 2026</span>
+
+    <span id="header-gear"
+          class="clip header-gear"
+          data-start="0"
+          data-duration="8"
+          data-track-index="4">⚙</span>
+
+    <style>
+      #header-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 290px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #header-root * { box-sizing: border-box; }
+      #header-root .clip { position: absolute; }
+
+      #header-avatar {
+        left: 42px;
+        top: 70px;
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        background: #050505;
+      }
+
+      #header-greeting {
+        left: 192px;
+        top: 70px;
+        width: 780px;
+        font-size: 60px;
+        line-height: 1.08;
+        font-weight: 820;
+        letter-spacing: -1.5px;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      #header-date {
+        left: 193px;
+        top: 153px;
+        font-size: 34px;
+        line-height: 1.2;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 0.1px;
+      }
+
+      #header-gear {
+        right: 46px;
+        top: 85px;
+        width: 60px;
+        height: 60px;
+        font-size: 57px;
+        line-height: 60px;
+        color: #737986;
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#header-avatar",
+        { opacity: 0, scale: 0.86, y: 10 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.42, ease: "back.out(1.5)" },
+        0
+      );
+      tl.fromTo("#header-greeting",
+        { opacity: 0, x: 24 },
+        { opacity: 1, x: 0, duration: 0.44, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo("#header-date",
+        { opacity: 0, x: 18 },
+        { opacity: 1, x: 0, duration: 0.38, ease: "power3.out" },
+        0.18
+      );
+      tl.fromTo("#header-gear",
+        { opacity: 0, rotate: -22, scale: 0.86 },
+        { opacity: 1, rotate: 0, scale: 1, duration: 0.46, ease: "back.out(1.6)" },
+        0.18
+      );
+      tl.set({}, {}, 8);
+      window.__timelines["dashboard-header"] = tl;
+    </script>
+  </div>
+</template>

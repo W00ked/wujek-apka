@@ -1,0 +1,290 @@
+<template id="meal-insights-template">
+  <div id="insights-root"
+       data-composition-id="meal-insights"
+       data-width="1080"
+       data-height="1760">
+
+    <div id="insights-card-bg"
+         class="clip insights-card-bg"
+         data-start="0"
+         data-duration="9"
+         data-track-index="1"></div>
+
+    <span id="insights-title"
+          class="clip insights-title"
+          data-start="0"
+          data-duration="9"
+          data-track-index="2">Meal Insights</span>
+
+    <span id="insights-p1"
+          class="clip insights-paragraph insights-p1"
+          data-start="0"
+          data-duration="9"
+          data-track-index="10">The high saturated fat content from beef
+and cheese may negatively impact
+cardiovascular health over time.</span>
+
+    <span id="insights-p2"
+          class="clip insights-paragraph insights-p2"
+          data-start="0"
+          data-duration="9"
+          data-track-index="11">This meal lacks sufficient dietary fiber,
+which is essential for healthy digestion
+and blood sugar regulation.</span>
+
+    <span id="insights-p3"
+          class="clip insights-paragraph insights-p3"
+          data-start="0"
+          data-duration="9"
+          data-track-index="12">The combination of refined bun and fried
+potatoes contributes to a rapid spike in
+blood glucose.</span>
+
+    <span id="insights-p4"
+          class="clip insights-paragraph insights-p4"
+          data-start="0"
+          data-duration="9"
+          data-track-index="13">Consider replacing fries with a side salad
+to increase micronutrient intake and
+reduce total caloric density.</span>
+
+    <div id="insights-divider"
+         class="clip insights-divider"
+         data-start="0"
+         data-duration="9"
+         data-track-index="14"></div>
+
+    <span id="insights-risk-title"
+          class="clip insights-risk-title"
+          data-start="0"
+          data-duration="9"
+          data-track-index="15">Potential risks</span>
+
+    <div id="risk-pill-1"
+         class="clip risk-pill risk-pill-1"
+         data-start="0"
+         data-duration="9"
+         data-track-index="20"></div>
+
+    <span id="risk-icon-1"
+          class="clip risk-icon risk-icon-1"
+          data-start="0"
+          data-duration="9"
+          data-track-index="21">⚐</span>
+
+    <span id="risk-label-1"
+          class="clip risk-label risk-label-1"
+          data-start="0"
+          data-duration="9"
+          data-track-index="22">High saturated fat</span>
+
+    <div id="risk-pill-2"
+         class="clip risk-pill risk-pill-2"
+         data-start="0"
+         data-duration="9"
+         data-track-index="23"></div>
+
+    <span id="risk-icon-2"
+          class="clip risk-icon risk-icon-2"
+          data-start="0"
+          data-duration="9"
+          data-track-index="24">⚐</span>
+
+    <span id="risk-label-2"
+          class="clip risk-label risk-label-2"
+          data-start="0"
+          data-duration="9"
+          data-track-index="25">High sodium content</span>
+
+    <div id="risk-pill-3"
+         class="clip risk-pill risk-pill-3"
+         data-start="0"
+         data-duration="9"
+         data-track-index="26"></div>
+
+    <span id="risk-icon-3"
+          class="clip risk-icon risk-icon-3"
+          data-start="0"
+          data-duration="9"
+          data-track-index="27">⚐</span>
+
+    <span id="risk-label-3"
+          class="clip risk-label risk-label-3"
+          data-start="0"
+          data-duration="9"
+          data-track-index="28">Refined carbohydrates</span>
+
+    <span id="insights-disclaimer"
+          class="clip insights-disclaimer"
+          data-start="0"
+          data-duration="9"
+          data-track-index="29">Values are AI-generated estimates and may not be
+accurate. Consult a healthcare professional for precise
+advice.</span>
+
+    <style>
+      #insights-root {
+        --canvas: #f3f4f2;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #a1a8b3;
+        --line: #e2e7e8;
+        --green: #2f8156;
+        --green-soft-line: #bcd9c8;
+        --red: #ed001c;
+        --red-soft: #f8e6e8;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1760px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #insights-root * { box-sizing: border-box; }
+      #insights-root .clip { position: absolute; }
+
+      #insights-card-bg {
+        left: 42px;
+        top: 0;
+        width: 996px;
+        height: 1715px;
+        border-radius: 52px;
+        background: #ffffff;
+      }
+
+      #insights-title {
+        left: 86px;
+        top: 62px;
+        color: var(--green);
+        font-size: 47px;
+        line-height: 1;
+        font-weight: 780;
+        letter-spacing: -0.6px;
+      }
+
+      .insights-paragraph {
+        left: 86px;
+        width: 910px;
+        color: var(--text);
+        font-size: 43px;
+        line-height: 1.35;
+        font-weight: 430;
+        letter-spacing: -0.35px;
+        white-space: pre-line;
+      }
+      #insights-p1 { top: 170px; }
+      #insights-p2 { top: 385px; }
+      #insights-p3 { top: 600px; }
+      #insights-p4 { top: 815px; }
+
+      #insights-divider {
+        left: 86px;
+        top: 1048px;
+        width: 912px;
+        height: 2px;
+        background: var(--green-soft-line);
+      }
+
+      #insights-risk-title {
+        left: 86px;
+        top: 1110px;
+        color: var(--text);
+        font-size: 47px;
+        line-height: 1;
+        font-weight: 820;
+        letter-spacing: -0.6px;
+      }
+
+      .risk-pill {
+        height: 86px;
+        border-radius: 46px;
+        background: var(--red-soft);
+      }
+      #risk-pill-1 { left: 136px; top: 1205px; width: 562px; }
+      #risk-pill-2 { left: 108px; top: 1345px; width: 622px; }
+      #risk-pill-3 { left: 86px; top: 1485px; width: 666px; }
+
+      .risk-icon {
+        width: 58px;
+        text-align: center;
+        color: var(--red);
+        font-size: 60px;
+        line-height: 1;
+        font-weight: 900;
+      }
+      #risk-icon-1 { left: 184px; top: 1218px; }
+      #risk-icon-2 { left: 156px; top: 1358px; }
+      #risk-icon-3 { left: 134px; top: 1498px; }
+
+      .risk-label {
+        color: var(--text);
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 430;
+      }
+      #risk-label-1 { left: 268px; top: 1230px; }
+      #risk-label-2 { left: 237px; top: 1370px; }
+      #risk-label-3 { left: 216px; top: 1510px; }
+
+      #insights-disclaimer {
+        left: 86px;
+        top: 1610px;
+        width: 905px;
+        color: var(--muted);
+        font-size: 32px;
+        line-height: 1.42;
+        font-weight: 420;
+        letter-spacing: -0.2px;
+        white-space: pre-line;
+      }
+    </style>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        tl.fromTo("#insights-card-bg",
+          { opacity: 0, y: 34, scale: 0.988 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+          0
+        );
+        tl.fromTo("#insights-title",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+          0.12
+        );
+        tl.fromTo(["#insights-p1", "#insights-p2", "#insights-p3", "#insights-p4"],
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.42, stagger: 0.10, ease: "power3.out" },
+          0.24
+        );
+        tl.fromTo("#insights-divider",
+          { opacity: 0, scaleX: 0, transformOrigin: "left center" },
+          { opacity: 1, scaleX: 1, duration: 0.38, ease: "power2.out" },
+          0.84
+        );
+        tl.fromTo("#insights-risk-title",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+          0.98
+        );
+        tl.fromTo(["#risk-pill-1", "#risk-icon-1", "#risk-label-1", "#risk-pill-2", "#risk-icon-2", "#risk-label-2", "#risk-pill-3", "#risk-icon-3", "#risk-label-3"],
+          { opacity: 0, y: 18, scale: 0.96 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.34, stagger: 0.035, ease: "back.out(1.35)" },
+          1.12
+        );
+        tl.fromTo("#insights-disclaimer",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" },
+          1.48
+        );
+        tl.to(["#risk-pill-1", "#risk-pill-2", "#risk-pill-3"], { scale: 1.02, duration: 0.18, stagger: 0.05, ease: "power2.out", transformOrigin: "center center" }, 1.90);
+        tl.to(["#risk-pill-1", "#risk-pill-2", "#risk-pill-3"], { scale: 1, duration: 0.26, stagger: 0.05, ease: "power2.out", transformOrigin: "center center" }, 2.12);
+        tl.set({}, {}, 9);
+        window.__timelines["meal-insights"] = tl;
+      })();
+    </script>
+  </div>
+</template>

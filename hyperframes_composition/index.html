@@ -10,7 +10,13 @@
         width: 1080px;
         height: 1920px;
         overflow: hidden;
-        background: #f4f5f4;
+        background: #1e293b;
+      }
+      #hf-placeholder-label code {
+        font-size: 0.85em;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 0.1em 0.35em;
+        border-radius: 6px;
       }
     </style>
   </head>
@@ -24,12 +30,35 @@
       data-height="1920"
       data-track-index="0"
     >
-      <p style="padding: 48px; font-family: system-ui">Placeholder — pipeline overwrites index.html.</p>
+      <p
+        id="hf-placeholder-label"
+        style="
+          padding: 64px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 42px;
+          line-height: 1.35;
+          color: #f8fafc;
+          max-width: 920px;
+        "
+      >
+        Placeholder — pipeline nadpisuje ten plik <code>index.html</code>. Ten widok i animacja GSAP służą tylko do
+        testu HyperFrames.
+      </p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
+      const label = document.querySelector("#hf-placeholder-label");
+      if (label) {
+        tl.fromTo(
+          label,
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 1.2, ease: "power2.out" },
+          0,
+        );
+        tl.to(label, { duration: 3.8 }, 1.2);
+      }
       window.__timelines["logi-ui"] = tl;
     </script>
   </body>

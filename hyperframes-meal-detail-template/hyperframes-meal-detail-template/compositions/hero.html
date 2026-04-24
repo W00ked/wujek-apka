@@ -1,0 +1,221 @@
+<template id="meal-hero-template">
+  <div id="hero-root"
+       data-composition-id="meal-hero"
+       data-width="1080"
+       data-height="1720">
+
+    <img id="hero-photo"
+         class="clip hero-photo"
+         src="../assets/hero-burger-fries.jpg"
+         data-start="0"
+         data-duration="9"
+         data-track-index="1">
+
+    <span id="hero-title"
+          class="clip hero-title"
+          data-start="0"
+          data-duration="9"
+          data-track-index="10">Classic Burger with Fries</span>
+
+    <span id="hero-description"
+          class="clip hero-description"
+          data-start="0"
+          data-duration="9"
+          data-track-index="11">The classic burger is an American icon,
+beloved for its juicy beef patty, fresh toppings,
+and soft bun. Served with crispy French fries,
+this meal is a staple of diners and fast food
+joints worldwide. Fun fact: The hamburger's
+origins are debated, but it became popular in
+the U.S. in the early 20th century and is now a
+symbol of American cuisine.</span>
+
+    <span id="hero-servings-label"
+          class="clip hero-servings-label"
+          data-start="0"
+          data-duration="9"
+          data-track-index="12">Servings:</span>
+
+    <span id="hero-info-icon"
+          class="clip hero-info-icon"
+          data-start="0"
+          data-duration="9"
+          data-track-index="13">ⓘ</span>
+
+    <div id="hero-serving-box"
+         class="clip hero-serving-box"
+         data-start="0"
+         data-duration="9"
+         data-track-index="14"></div>
+
+    <span id="hero-serving-value"
+          class="clip hero-serving-value"
+          data-start="0"
+          data-duration="9"
+          data-track-index="15">1</span>
+
+    <div id="hero-weight-box"
+         class="clip hero-weight-box"
+         data-start="0"
+         data-duration="9"
+         data-track-index="16"></div>
+
+    <span id="hero-weight-value"
+          class="clip hero-weight-value"
+          data-start="0"
+          data-duration="9"
+          data-track-index="17">~ 375 g</span>
+
+    <style>
+      #hero-root {
+        --canvas: #f3f4f2;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e7e8;
+        --green: #4a9c6a;
+        --green-dark: #2f8156;
+        --green-soft: #eaf4ee;
+        --red: #ed001c;
+        --red-soft: #f8e6e8;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 24px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1720px;
+        overflow: hidden;
+        background: transparent;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #hero-root * { box-sizing: border-box; }
+      #hero-root .clip { position: absolute; }
+
+      #hero-photo {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 850px;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      #hero-title {
+        left: 42px;
+        top: 930px;
+        width: 996px;
+        font-size: 55px;
+        line-height: 1.08;
+        font-weight: 820;
+        letter-spacing: -1.1px;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      #hero-description {
+        left: 42px;
+        top: 1050px;
+        width: 996px;
+        font-size: 43px;
+        line-height: 1.36;
+        font-weight: 430;
+        letter-spacing: -0.35px;
+        color: var(--text);
+        white-space: pre-line;
+      }
+
+      #hero-servings-label {
+        left: 42px;
+        top: 1515px;
+        color: var(--text);
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 430;
+      }
+
+      #hero-info-icon {
+        left: 248px;
+        top: 1510px;
+        color: #737b8a;
+        font-size: 36px;
+        line-height: 1;
+        font-weight: 500;
+      }
+
+      #hero-serving-box {
+        left: 310px;
+        top: 1460px;
+        width: 132px;
+        height: 142px;
+        border-radius: 18px;
+        background: #ffffff;
+      }
+
+      #hero-serving-value {
+        left: 340px;
+        top: 1515px;
+        width: 62px;
+        text-align: center;
+        color: var(--text);
+        font-size: 43px;
+        line-height: 1;
+        font-weight: 430;
+      }
+
+      #hero-weight-box {
+        left: 796px;
+        top: 1475px;
+        width: 242px;
+        height: 116px;
+        border-radius: 18px;
+        background: #f8fafb;
+        border: 2px solid #e2e7e8;
+      }
+
+      #hero-weight-value {
+        left: 835px;
+        top: 1512px;
+        width: 190px;
+        text-align: center;
+        color: var(--text);
+        font-size: 41px;
+        line-height: 1;
+        font-weight: 430;
+        white-space: nowrap;
+      }
+    </style>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        tl.fromTo("#hero-photo",
+          { opacity: 0, scale: 1.04 },
+          { opacity: 1, scale: 1, duration: 0.70, ease: "power3.out" },
+          0
+        );
+        tl.fromTo("#hero-title",
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.44, ease: "power3.out" },
+          0.22
+        );
+        tl.fromTo("#hero-description",
+          { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" },
+          0.34
+        );
+        tl.fromTo(["#hero-servings-label", "#hero-info-icon", "#hero-serving-box", "#hero-serving-value", "#hero-weight-box", "#hero-weight-value"],
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.38, stagger: 0.035, ease: "power3.out" },
+          0.58
+        );
+        tl.to("#hero-photo", { scale: 1.045, duration: 3.2, ease: "power1.inOut" }, 0.75);
+        tl.set({}, {}, 9);
+        window.__timelines["meal-hero"] = tl;
+      })();
+    </script>
+  </div>
+</template>

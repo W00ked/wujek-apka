@@ -1,0 +1,448 @@
+<template id="dashboard-summary-template">
+  <div id="summary-root"
+       data-composition-id="dashboard-summary"
+       data-width="1080"
+       data-height="820">
+
+    <div id="summary-card-bg"
+         class="clip summary-card-bg"
+         data-start="0"
+         data-duration="8"
+         data-track-index="1"></div>
+
+    <div id="summary-glycemic-box"
+         class="clip summary-glycemic-box"
+         data-start="0"
+         data-duration="8"
+         data-track-index="2"></div>
+
+    <span id="summary-glycemic-label"
+          class="clip summary-glycemic-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="10">Glycemic Load</span>
+
+    <span id="summary-glycemic-value"
+          class="clip summary-glycemic-value"
+          data-start="0"
+          data-duration="8"
+          data-track-index="11">132</span>
+
+    <span id="summary-glycemic-slash"
+          class="clip summary-glycemic-slash"
+          data-start="0"
+          data-duration="8"
+          data-track-index="12">/</span>
+
+    <span id="summary-glycemic-target"
+          class="clip summary-glycemic-target"
+          data-start="0"
+          data-duration="8"
+          data-track-index="13">160</span>
+
+    <div id="summary-v-divider"
+         class="clip summary-v-divider"
+         data-start="0"
+         data-duration="8"
+         data-track-index="3"></div>
+
+    <span id="summary-calories-label"
+          class="clip summary-calories-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="14">Calories</span>
+
+    <span id="summary-calories-value"
+          class="clip summary-calories-value"
+          data-start="0"
+          data-duration="8"
+          data-track-index="15">297</span>
+
+    <span id="summary-calories-target"
+          class="clip summary-calories-target"
+          data-start="0"
+          data-duration="8"
+          data-track-index="16">/1600</span>
+
+    <div id="summary-line-1"
+         class="clip summary-line summary-line-1"
+         data-start="0"
+         data-duration="8"
+         data-track-index="4"></div>
+
+    <span id="summary-protein-label"
+          class="clip summary-row-label summary-protein-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="17">Protein</span>
+
+    <div id="summary-protein-track"
+         class="clip summary-progress-track summary-protein-track"
+         data-start="0"
+         data-duration="8"
+         data-track-index="18"></div>
+
+    <div id="summary-protein-fill"
+         class="clip summary-progress-fill summary-protein-fill"
+         data-start="0"
+         data-duration="8"
+         data-track-index="30"></div>
+
+    <span id="summary-protein-value"
+          class="clip summary-row-value summary-protein-value"
+          data-start="0"
+          data-duration="8"
+          data-track-index="19">46</span>
+
+    <span id="summary-protein-target"
+          class="clip summary-row-target summary-protein-target"
+          data-start="0"
+          data-duration="8"
+          data-track-index="20">/150g</span>
+
+    <div id="summary-line-2"
+         class="clip summary-line summary-line-2"
+         data-start="0"
+         data-duration="8"
+         data-track-index="5"></div>
+
+    <span id="summary-fats-label"
+          class="clip summary-row-label summary-fats-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="21">Fats</span>
+
+    <div id="summary-fats-track"
+         class="clip summary-progress-track summary-fats-track"
+         data-start="0"
+         data-duration="8"
+         data-track-index="22"></div>
+
+    <span id="summary-fats-value"
+          class="clip summary-row-value summary-fats-value"
+          data-start="0"
+          data-duration="8"
+          data-track-index="23">-13</span>
+
+    <span id="summary-fats-target"
+          class="clip summary-row-target summary-fats-target"
+          data-start="0"
+          data-duration="8"
+          data-track-index="24">/66g</span>
+
+    <div id="summary-line-3"
+         class="clip summary-line summary-line-3"
+         data-start="0"
+         data-duration="8"
+         data-track-index="6"></div>
+
+    <span id="summary-carbs-label"
+          class="clip summary-row-label summary-carbs-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="25">Carbs</span>
+
+    <div id="summary-carbs-track"
+         class="clip summary-progress-track summary-carbs-track"
+         data-start="0"
+         data-duration="8"
+         data-track-index="26"></div>
+
+    <div id="summary-carbs-fill"
+         class="clip summary-progress-fill summary-carbs-fill"
+         data-start="0"
+         data-duration="8"
+         data-track-index="31"></div>
+
+    <span id="summary-carbs-value"
+          class="clip summary-row-value summary-carbs-value"
+          data-start="0"
+          data-duration="8"
+          data-track-index="27">153</span>
+
+    <span id="summary-carbs-target"
+          class="clip summary-row-target summary-carbs-target"
+          data-start="0"
+          data-duration="8"
+          data-track-index="28">/200g</span>
+
+    <span id="summary-remaining-pill"
+          class="clip summary-remaining-pill"
+          data-start="0"
+          data-duration="8"
+          data-track-index="32">⏳  Remaining</span>
+
+    <style>
+      #summary-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 820px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #summary-root * { box-sizing: border-box; }
+      #summary-root .clip { position: absolute; }
+
+      #summary-card-bg {
+        left: 42px;
+        top: 10px;
+        width: 996px;
+        height: 780px;
+        border-radius: var(--radius-xl);
+        background: var(--card);
+      }
+
+      #summary-glycemic-box {
+        left: 86px;
+        top: 40px;
+        width: 444px;
+        height: 260px;
+        border-radius: 36px;
+        background: var(--green);
+      }
+
+      #summary-glycemic-label {
+        left: 168px;
+        top: 83px;
+        font-size: 39px;
+        line-height: 1.15;
+        font-weight: 500;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+
+      #summary-glycemic-value {
+        left: 126px;
+        top: 145px;
+        width: 190px;
+        font-size: 128px;
+        line-height: 1;
+        font-weight: 820;
+        color: #ffffff;
+        letter-spacing: -4px;
+      }
+
+      #summary-glycemic-slash {
+        left: 360px;
+        top: 184px;
+        font-size: 66px;
+        line-height: 1;
+        font-weight: 650;
+        color: #ffffff;
+      }
+
+      #summary-glycemic-target {
+        left: 418px;
+        top: 189px;
+        font-size: 46px;
+        line-height: 1;
+        font-weight: 760;
+        color: #ffffff;
+      }
+
+      #summary-v-divider {
+        left: 572px;
+        top: 56px;
+        width: 2px;
+        height: 244px;
+        border-radius: 4px;
+        background: var(--line);
+      }
+
+      #summary-calories-label {
+        left: 615px;
+        top: 92px;
+        font-size: 45px;
+        line-height: 1;
+        font-weight: 530;
+        color: var(--text);
+      }
+
+      #summary-calories-value {
+        left: 614px;
+        top: 168px;
+        font-size: 63px;
+        line-height: 1;
+        font-weight: 820;
+        letter-spacing: -1px;
+        color: var(--text);
+      }
+
+      #summary-calories-target {
+        left: 745px;
+        top: 178px;
+        font-size: 41px;
+        line-height: 1;
+        font-weight: 450;
+        color: var(--muted);
+      }
+
+      .summary-line {
+        left: 86px;
+        width: 912px;
+        height: 2px;
+        background: var(--line);
+      }
+      #summary-line-1 { top: 335px; }
+      #summary-line-2 { top: 475px; }
+      #summary-line-3 { top: 615px; }
+
+      .summary-row-label {
+        left: 86px;
+        font-size: 39px;
+        line-height: 1;
+        font-weight: 520;
+        color: var(--text);
+      }
+      #summary-protein-label { top: 389px; }
+      #summary-fats-label { top: 529px; }
+      #summary-carbs-label { top: 669px; }
+
+      .summary-progress-track {
+        left: 318px;
+        width: 270px;
+        height: 28px;
+        border-radius: 999px;
+        background: #e2e6eb;
+        overflow: hidden;
+      }
+      #summary-protein-track { top: 390px; }
+      #summary-fats-track { top: 530px; }
+      #summary-carbs-track { top: 670px; }
+
+      .summary-progress-fill {
+        left: 318px;
+        height: 28px;
+        border-radius: 999px;
+        background: var(--green);
+        transform-origin: left center;
+      }
+      #summary-protein-fill {
+        top: 390px;
+        width: 82px;
+      }
+      #summary-carbs-fill {
+        top: 670px;
+        width: 206px;
+      }
+
+      .summary-row-value {
+        left: 737px;
+        font-size: 52px;
+        line-height: 1;
+        font-weight: 820;
+        color: var(--text);
+        letter-spacing: -1px;
+        text-align: right;
+      }
+      #summary-protein-value { top: 374px; }
+      #summary-fats-value { top: 514px; color: var(--red); }
+      #summary-carbs-value { top: 654px; }
+
+      .summary-row-target {
+        left: 826px;
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 450;
+        color: var(--muted);
+      }
+      #summary-protein-target { top: 384px; }
+      #summary-fats-target { top: 524px; left: 826px; }
+      #summary-carbs-target { top: 664px; left: 842px; }
+
+      #summary-remaining-pill {
+        left: 398px;
+        top: 714px;
+        min-width: 286px;
+        height: 66px;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--green);
+        text-align: center;
+        padding: 15px 30px 0;
+        font-size: 33px;
+        line-height: 1;
+        font-weight: 550;
+        white-space: nowrap;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#summary-card-bg",
+        { opacity: 0, y: 34, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+        0
+      );
+      tl.fromTo("#summary-glycemic-box",
+        { opacity: 0, y: 22, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.4)" },
+        0.10
+      );
+      tl.fromTo(["#summary-glycemic-label", "#summary-glycemic-value", "#summary-glycemic-slash", "#summary-glycemic-target"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.36, stagger: 0.035, ease: "power3.out" },
+        0.22
+      );
+      tl.fromTo(["#summary-v-divider", "#summary-calories-label", "#summary-calories-value", "#summary-calories-target"],
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.36, stagger: 0.035, ease: "power3.out" },
+        0.28
+      );
+      tl.fromTo(["#summary-line-1", "#summary-line-2", "#summary-line-3"],
+        { opacity: 0, scaleX: 0, transformOrigin: "left center" },
+        { opacity: 1, scaleX: 1, duration: 0.42, stagger: 0.06, ease: "power2.out" },
+        0.46
+      );
+      tl.fromTo(["#summary-protein-label", "#summary-protein-value", "#summary-protein-target"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.30, stagger: 0.025, ease: "power2.out" },
+        0.56
+      );
+      tl.fromTo(["#summary-fats-label", "#summary-fats-value", "#summary-fats-target"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.30, stagger: 0.025, ease: "power2.out" },
+        0.68
+      );
+      tl.fromTo(["#summary-carbs-label", "#summary-carbs-value", "#summary-carbs-target"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.30, stagger: 0.025, ease: "power2.out" },
+        0.80
+      );
+      tl.fromTo(["#summary-protein-track", "#summary-fats-track", "#summary-carbs-track"],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.24, stagger: 0.05, ease: "power2.out" },
+        0.58
+      );
+      tl.fromTo(["#summary-protein-fill", "#summary-carbs-fill"],
+        { opacity: 1, scaleX: 0, transformOrigin: "left center" },
+        { opacity: 1, scaleX: 1, duration: 0.52, stagger: 0.10, ease: "power3.out" },
+        0.74
+      );
+      tl.fromTo("#summary-remaining-pill",
+        { opacity: 0, y: 18, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.6)" },
+        0.98
+      );
+      tl.set({}, {}, 8);
+      window.__timelines["dashboard-summary"] = tl;
+    </script>
+  </div>
+</template>

@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HyperFrames Dashboard Composition</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    :root {
+      --canvas: #f4f4f3;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #737b8a;
+      --line: #e2e6eb;
+      --green: #4aa06c;
+      --green-dark: #276d4c;
+      --green-soft: #eaf4ee;
+      --red: #ec001c;
+      --blue: #4251b6;
+      --radius-xl: 52px;
+      --radius-lg: 40px;
+      --radius-md: 28px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: var(--canvas); }
+
+    #main {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--canvas);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    #dashboard-content-rail {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 4300px;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .composition-slot {
+      position: absolute;
+      left: 0;
+      width: 1080px;
+      overflow: visible;
+      opacity: 0;
+      transform-origin: center top;
+    }
+
+    #header-slot { top: 54px; height: 260px; }
+    #summary-slot { top: 300px; height: 820px; }
+    #journal-slot { top: 1084px; height: 820px; }
+    #report-slot { top: 1844px; height: 380px; }
+    #habits-slot { top: 2196px; height: 560px; }
+    #education-slot { top: 2720px; height: 760px; }
+    #tools-slot { top: 3440px; height: 860px; }
+    #bottom-nav-slot {
+      position: absolute;
+      left: 0;
+      top: 1666px;
+      width: 1080px;
+      height: 300px;
+      overflow: visible;
+      opacity: 0;
+      transform-origin: center bottom;
+    }
+
+    .status-clip {
+      position: absolute;
+      z-index: 900;
+      color: #000000;
+      line-height: 1;
+    }
+
+    #status-time {
+      left: 114px;
+      top: 61px;
+      font-size: 43px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    #status-muted {
+      left: 244px;
+      top: 55px;
+      width: 42px;
+      height: 42px;
+      font-size: 39px;
+      font-weight: 700;
+      transform: rotate(-18deg);
+      opacity: 0.92;
+    }
+
+    #status-cell {
+      left: 778px;
+      top: 65px;
+      width: 52px;
+      height: 32px;
+      background:
+        linear-gradient(to top, #111 0 34%, transparent 34% 100%) 0 17px / 8px 15px no-repeat,
+        linear-gradient(to top, #111 0 50%, transparent 50% 100%) 15px 12px / 8px 20px no-repeat,
+        linear-gradient(to top, #aeb4bc 0 70%, transparent 70% 100%) 30px 7px / 8px 25px no-repeat,
+        linear-gradient(to top, #d2d6dc 0 100%, transparent 100% 100%) 45px 2px / 8px 30px no-repeat;
+      border-radius: 4px;
+    }
+
+    #status-wifi {
+      left: 852px;
+      top: 54px;
+      width: 54px;
+      height: 42px;
+      font-size: 43px;
+      font-weight: 900;
+    }
+
+    #status-battery {
+      left: 920px;
+      top: 54px;
+      width: 72px;
+      height: 38px;
+      border-radius: 13px;
+      background: #d9dce0;
+      box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.08);
+    }
+    #status-battery::after {
+      content: "";
+      position: absolute;
+      right: -7px;
+      top: 12px;
+      width: 5px;
+      height: 14px;
+      border-radius: 2px;
+      background: #d9dce0;
+    }
+    #status-battery::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      width: 15px;
+      height: 26px;
+      border-radius: 6px;
+      background: #f4c21f;
+    }
+
+    #status-battery-text {
+      left: 947px;
+      top: 60px;
+      width: 36px;
+      text-align: center;
+      font-size: 25px;
+      font-weight: 800;
+      color: #2b3038;
+    }
+  </style>
+</head>
+<body>
+  <div id="main"
+       data-composition-id="dashboard"
+       data-start="0"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="dashboard-content-rail">
+      <div id="header-slot"
+           class="clip composition-slot header-slot"
+           data-composition-id="dashboard-header"
+           data-composition-src="./compositions/header.html"
+           data-start="0"
+           data-track-index="10"></div>
+
+      <div id="summary-slot"
+           class="clip composition-slot summary-slot"
+           data-composition-id="dashboard-summary"
+           data-composition-src="./compositions/summary-card.html"
+           data-start="0.15"
+           data-track-index="11"></div>
+
+      <div id="journal-slot"
+           class="clip composition-slot journal-slot"
+           data-composition-id="dashboard-journal"
+           data-composition-src="./compositions/journal-card.html"
+           data-start="0.30"
+           data-track-index="12"></div>
+
+      <div id="report-slot"
+           class="clip composition-slot report-slot"
+           data-composition-id="dashboard-report"
+           data-composition-src="./compositions/report-card.html"
+           data-start="0.45"
+           data-track-index="13"></div>
+
+      <div id="habits-slot"
+           class="clip composition-slot habits-slot"
+           data-composition-id="dashboard-habits"
+           data-composition-src="./compositions/habits.html"
+           data-start="0.60"
+           data-track-index="14"></div>
+
+      <div id="education-slot"
+           class="clip composition-slot education-slot"
+           data-composition-id="dashboard-education"
+           data-composition-src="./compositions/education.html"
+           data-start="0.75"
+           data-track-index="15"></div>
+
+      <div id="tools-slot"
+           class="clip composition-slot tools-slot"
+           data-composition-id="dashboard-tools"
+           data-composition-src="./compositions/tools.html"
+           data-start="0.90"
+           data-track-index="16"></div>
+    </div>
+
+    <div id="bottom-nav-slot"
+         class="clip composition-slot bottom-nav-slot"
+         data-composition-id="dashboard-bottom-nav"
+         data-composition-src="./compositions/bottom-nav.html"
+         data-start="0"
+         data-track-index="80"></div>
+
+    <span id="status-time"
+          class="clip status-clip status-time"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="90">01:50</span>
+
+    <span id="status-muted"
+          class="clip status-clip status-muted"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="91">⌁</span>
+
+    <div id="status-cell"
+         class="clip status-clip status-cell"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="92"></div>
+
+    <span id="status-wifi"
+          class="clip status-clip status-wifi"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="93">⌒</span>
+
+    <div id="status-battery"
+         class="clip status-clip status-battery"
+         data-start="0"
+         data-duration="8.5"
+         data-track-index="94"></div>
+
+    <span id="status-battery-text"
+          class="clip status-clip status-battery-text"
+          data-start="0"
+          data-duration="8.5"
+          data-track-index="95">13</span>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.set("#dashboard-content-rail", { y: 0 }, 0);
+
+      tl.fromTo(["#status-time", "#status-muted", "#status-cell", "#status-wifi", "#status-battery", "#status-battery-text"],
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" },
+        0
+      );
+
+      tl.fromTo("#bottom-nav-slot",
+        { opacity: 0, y: 76, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.62, ease: "power3.out" },
+        0
+      );
+
+      tl.fromTo("#header-slot",
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.44, ease: "power3.out" },
+        0.02
+      );
+
+      tl.fromTo("#summary-slot",
+        { opacity: 0, y: 42, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.58, ease: "power3.out" },
+        0.14
+      );
+
+      tl.fromTo("#journal-slot",
+        { opacity: 0, y: 44, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+        0.30
+      );
+
+      tl.fromTo("#report-slot",
+        { opacity: 0, y: 48, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.48, ease: "power3.out" },
+        0.48
+      );
+
+      tl.fromTo("#habits-slot",
+        { opacity: 0, y: 50, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.48, ease: "power3.out" },
+        0.62
+      );
+
+      tl.fromTo("#education-slot",
+        { opacity: 0, y: 54, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" },
+        0.78
+      );
+
+      tl.fromTo("#tools-slot",
+        { opacity: 0, y: 56, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" },
+        0.94
+      );
+
+      tl.to("#dashboard-content-rail", { y: -955, duration: 1.15, ease: "power2.inOut" }, 2.35);
+      tl.to("#dashboard-content-rail", { y: -2700, duration: 1.25, ease: "power2.inOut" }, 5.00);
+
+      tl.to("#bottom-nav-slot", { y: -4, duration: 0.16, ease: "power2.out" }, 0.58);
+      tl.to("#bottom-nav-slot", { y: 0, duration: 0.22, ease: "power2.out" }, 0.74);
+
+      tl.set({}, {}, 8.5);
+      window.__timelines["dashboard"] = tl;
+    </script>
+  </div>
+</body>
+</html>

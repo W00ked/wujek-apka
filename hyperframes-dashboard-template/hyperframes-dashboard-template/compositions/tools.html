@@ -1,0 +1,292 @@
+<template id="dashboard-tools-template">
+  <div id="tools-root"
+       data-composition-id="dashboard-tools"
+       data-width="1080"
+       data-height="860">
+
+    <div id="tools-meal-card"
+         class="clip tools-card tools-meal-card"
+         data-start="0"
+         data-duration="8"
+         data-track-index="1"></div>
+
+    <span id="tools-meal-title"
+          class="clip tools-card-title tools-meal-title"
+          data-start="0"
+          data-duration="8"
+          data-track-index="10">Meal Planner</span>
+
+    <span id="tools-meal-description"
+          class="clip tools-card-description tools-meal-description"
+          data-start="0"
+          data-duration="8"
+          data-track-index="11">Get a personalized low-glycemic meal plan
+tailored to your goals and preferences.</span>
+
+    <div id="tools-meal-arrow-circle"
+         class="clip tools-arrow-circle tools-meal-arrow-circle"
+         data-start="0"
+         data-duration="8"
+         data-track-index="30"></div>
+
+    <span id="tools-meal-arrow"
+          class="clip tools-arrow tools-meal-arrow"
+          data-start="0"
+          data-duration="8"
+          data-track-index="31">›</span>
+
+    <div id="tools-homa-card"
+         class="clip tools-card tools-homa-card"
+         data-start="0"
+         data-duration="8"
+         data-track-index="2"></div>
+
+    <span id="tools-homa-title"
+          class="clip tools-card-title tools-homa-title"
+          data-start="0"
+          data-duration="8"
+          data-track-index="12">HOMA-IR Check</span>
+
+    <span id="tools-homa-description"
+          class="clip tools-card-description tools-homa-description"
+          data-start="0"
+          data-duration="8"
+          data-track-index="13">Calculate your HOMA-IR to understand your
+insulin sensitivity in seconds.</span>
+
+    <div id="tools-homa-arrow-circle"
+         class="clip tools-arrow-circle tools-homa-arrow-circle"
+         data-start="0"
+         data-duration="8"
+         data-track-index="32"></div>
+
+    <span id="tools-homa-arrow"
+          class="clip tools-arrow tools-homa-arrow"
+          data-start="0"
+          data-duration="8"
+          data-track-index="33">›</span>
+
+    <div id="tools-feedback-card"
+         class="clip tools-mascot-card tools-feedback-card"
+         data-start="0"
+         data-duration="8"
+         data-track-index="3"></div>
+
+    <span id="tools-feedback-berry"
+          class="clip tools-berry tools-feedback-berry"
+          data-start="0"
+          data-duration="8"
+          data-track-index="34">🍓</span>
+
+    <span id="tools-feedback-label"
+          class="clip tools-mascot-label tools-feedback-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="35">Feedback</span>
+
+    <div id="tools-rate-card"
+         class="clip tools-mascot-card tools-rate-card"
+         data-start="0"
+         data-duration="8"
+         data-track-index="4"></div>
+
+    <span id="tools-rate-berry"
+          class="clip tools-berry tools-rate-berry"
+          data-start="0"
+          data-duration="8"
+          data-track-index="36">🍓</span>
+
+    <span id="tools-rate-label"
+          class="clip tools-mascot-label tools-rate-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="37">Rate App</span>
+
+    <div id="tools-share-card"
+         class="clip tools-mascot-card tools-share-card"
+         data-start="0"
+         data-duration="8"
+         data-track-index="5"></div>
+
+    <span id="tools-share-berry"
+          class="clip tools-berry tools-share-berry"
+          data-start="0"
+          data-duration="8"
+          data-track-index="38">🍓</span>
+
+    <span id="tools-share-label"
+          class="clip tools-mascot-label tools-share-label"
+          data-start="0"
+          data-duration="8"
+          data-track-index="39">Share</span>
+
+    <style>
+      #tools-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --line: #e2e6eb;
+        --green: #4aa06c;
+        --green-dark: #276d4c;
+        --green-soft: #eaf4ee;
+        --red: #ec001c;
+        --blue: #4251b6;
+        --radius-xl: 52px;
+        --radius-lg: 40px;
+        --radius-md: 28px;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 860px;
+        overflow: visible;
+        color: var(--text);
+        font-family: var(--font);
+      }
+      #tools-root * { box-sizing: border-box; }
+      #tools-root .clip { position: absolute; }
+
+      .tools-card {
+        left: 42px;
+        width: 996px;
+        height: 270px;
+        border-radius: var(--radius-xl);
+        background: var(--card);
+      }
+      #tools-meal-card { top: 0; }
+      #tools-homa-card { top: 328px; }
+
+      .tools-card-title {
+        left: 86px;
+        font-size: 54px;
+        line-height: 1;
+        font-weight: 500;
+        letter-spacing: -1px;
+        color: var(--text);
+      }
+      #tools-meal-title { top: 72px; }
+      #tools-homa-title { top: 400px; }
+
+      .tools-card-description {
+        left: 86px;
+        width: 770px;
+        font-size: 36px;
+        line-height: 1.34;
+        font-weight: 430;
+        letter-spacing: -0.15px;
+        color: var(--text);
+        white-space: pre-line;
+      }
+      #tools-meal-description { top: 160px; }
+      #tools-homa-description { top: 488px; }
+
+      .tools-arrow-circle {
+        left: 886px;
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        background: #f0f1f3;
+      }
+      #tools-meal-arrow-circle { top: 52px; }
+      #tools-homa-arrow-circle { top: 380px; }
+
+      .tools-arrow {
+        left: 922px;
+        width: 48px;
+        height: 86px;
+        color: #737986;
+        font-size: 78px;
+        line-height: 1;
+        font-weight: 420;
+        text-align: center;
+      }
+      #tools-meal-arrow { top: 59px; }
+      #tools-homa-arrow { top: 387px; }
+
+      .tools-mascot-card {
+        top: 644px;
+        width: 320px;
+        height: 250px;
+        border-radius: 52px 52px 0 0;
+        background: var(--card);
+        overflow: hidden;
+      }
+      #tools-feedback-card { left: 42px; }
+      #tools-rate-card { left: 410px; }
+      #tools-share-card { left: 778px; }
+
+      .tools-berry {
+        top: 675px;
+        width: 220px;
+        text-align: center;
+        font-size: 156px;
+        line-height: 1;
+        filter: saturate(1.15);
+      }
+      #tools-feedback-berry { left: 92px; }
+      #tools-rate-berry { left: 460px; }
+      #tools-share-berry { left: 828px; }
+
+      .tools-mascot-label {
+        top: 804px;
+        width: 320px;
+        height: 90px;
+        border-radius: 0 0 42px 42px;
+        background: var(--green);
+        color: #ffffff;
+        text-align: center;
+        font-size: 38px;
+        line-height: 82px;
+        font-weight: 470;
+      }
+      #tools-feedback-label { left: 42px; }
+      #tools-rate-label { left: 410px; }
+      #tools-share-label { left: 778px; }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#tools-meal-card",
+        { opacity: 0, y: 34, scale: 0.988 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" },
+        0
+      );
+      tl.fromTo(["#tools-meal-title", "#tools-meal-description", "#tools-meal-arrow-circle", "#tools-meal-arrow"],
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.38, stagger: 0.055, ease: "power3.out" },
+        0.16
+      );
+      tl.fromTo("#tools-homa-card",
+        { opacity: 0, y: 34, scale: 0.988 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" },
+        0.44
+      );
+      tl.fromTo(["#tools-homa-title", "#tools-homa-description", "#tools-homa-arrow-circle", "#tools-homa-arrow"],
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.38, stagger: 0.055, ease: "power3.out" },
+        0.60
+      );
+      tl.fromTo(["#tools-feedback-card", "#tools-rate-card", "#tools-share-card"],
+        { opacity: 0, y: 34, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.42, stagger: 0.07, ease: "power3.out" },
+        0.94
+      );
+      tl.fromTo(["#tools-feedback-berry", "#tools-rate-berry", "#tools-share-berry"],
+        { opacity: 0, y: 24, scale: 0.86 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.42, stagger: 0.07, ease: "back.out(1.7)" },
+        1.04
+      );
+      tl.fromTo(["#tools-feedback-label", "#tools-rate-label", "#tools-share-label"],
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.32, stagger: 0.07, ease: "power3.out" },
+        1.14
+      );
+      tl.to(["#tools-meal-arrow", "#tools-homa-arrow"], { x: 8, duration: 0.22, ease: "power2.out" }, 1.62);
+      tl.to(["#tools-meal-arrow", "#tools-homa-arrow"], { x: 0, duration: 0.30, ease: "power2.out" }, 1.84);
+      tl.set({}, {}, 8);
+      window.__timelines["dashboard-tools"] = tl;
+    </script>
+  </div>
+</template>
