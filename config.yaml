@@ -28,6 +28,28 @@ openai:
   timeout_sec: 60
   max_retries: 3
 
+image_generation:
+  model: gpt-image-2
+  prompt_version: food-photo-v1
+  size: 1024x1536
+  quality: high
+  output_format: webp
+  output_compression: 92
+  variants: 1
+  cache_dir: artifacts/image_cache
+  max_cost_usd: 1.0
+  allow_high_cost: false
+  pricing:
+    image_input_per_1m: 8.0
+    image_cached_input_per_1m: 2.0
+    image_output_per_1m: 30.0
+    text_input_per_1m: 5.0
+    text_cached_input_per_1m: 1.25
+
+r2:
+  key_prefix: logi-food-images
+  cache_control: "public, max-age=31536000, immutable"
+
 tts:
   model: gemini-3.1-flash-tts-preview
   voice_name: kore

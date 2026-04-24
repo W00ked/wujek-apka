@@ -21,6 +21,7 @@ dependencies = [
   "google-genai",
   "tenacity",
   "faster-whisper",
+  "boto3",
 ]
 
 [project.scripts]

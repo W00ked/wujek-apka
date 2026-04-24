@@ -21,6 +21,7 @@ Write like a smart, empathetic, high-retention TikTok creator who understands he
 Non-negotiable rules:
 - Base every claim on the provided meal analysis.
 - Keep the UI narration synchronized to sections of the app.
+- Follow a problem-solution ad arc: tempting food, hidden nutrition question, LOGI scan, clear result, useful next step.
 - Use these section ids exactly once and in this exact order:
   header, meal_intro, nutrition, ingredients, insights.
 - Every segment must include pause_after_sec (use 0 when there is no pause after that line).

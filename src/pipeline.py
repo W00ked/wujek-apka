@@ -17,16 +17,18 @@ from .compose_ffmpeg import (
     trim_or_pad_video,
 )
 from .config import Settings
-from .errors import PipelineError
+from .errors import PipelineError, ValidationError
 from .heygen_client import HeyGenClient
+from .hyperframes_runner import copy_hf_artifacts_to_page_mirror, run_hyperframes_render
+from .image_generation import FoodImageArtifact, prepare_food_image, record_food_image_public_url
 from .llm_script import create_script_planner
 from .logi_client import build_scan_payload, create_logi_scanner, load_cached_scan
 from .logging_utils import configure_logging, get_logger
 from .models import MealScan, ScanResponse
-from .hyperframes_runner import copy_hf_artifacts_to_page_mirror, run_hyperframes_render
 from .record_browser import record_page
 from .render_html import render_page
 from .render_hyperframes import prepare_hf_project_dir, render_hyperframes_index
+from .r2_uploader import upload_to_r2
 from .subtitles import generate_subtitle_assets
 from .tts import create_tts_engine
 from .utils import ensure_directory, timestamp_slug
@@ -34,10 +36,16 @@ from .utils import ensure_directory, timestamp_slug
 
 @dataclass
 class PipelineRequest:
+    dish: str | None = None
     prompt: str | None = None
     image_url: str | None = None
     use_cached_scan: Path | None = None
     skip_intro: bool = False
+    regenerate_image: bool = False
+    image_variants: int | None = None
+    max_image_cost_usd: float | None = None
+    allow_high_cost: bool | None = None
+    language: str = "en"
 
 
 def _init_run_dir(settings: Settings) -> Path:
@@ -52,15 +60,65 @@ def _init_run_dir(settings: Settings) -> Path:
             settings.secrets.openai_api_key,
             settings.secrets.google_api_key,
             settings.secrets.heygen_api_key or "",
+            settings.secrets.r2_access_key_id or "",
+            settings.secrets.r2_secret_access_key or "",
         ],
     )
     return run_dir
+
+
+def _prepare_dish_image(
+    request: PipelineRequest,
+    settings: Settings,
+    run_dir: Path,
+) -> FoodImageArtifact | None:
+    if not request.dish:
+        return None
+    artifact = prepare_food_image(
+        request.dish,
+        settings,
+        run_dir,
+        regenerate_image=request.regenerate_image,
+        image_variants=request.image_variants,
+        max_image_cost_usd=request.max_image_cost_usd,
+        allow_high_cost=request.allow_high_cost,
+        language=request.language,
+    )
+    if artifact.public_url:
+        return artifact
+    upload_result = upload_to_r2(
+        artifact.image_path,
+        dish=artifact.dish,
+        cache_key=artifact.cache_key,
+        settings=settings,
+    )
+    record_food_image_public_url(artifact, upload_result.public_url)
+    return artifact
+
+
+def _validate_request(request: PipelineRequest) -> None:
+    has_image_options = bool(
+        request.regenerate_image or request.image_variants or request.max_image_cost_usd
+    )
+    if request.use_cached_scan:
+        if has_image_options and not request.dish:
+            raise ValidationError("image options require --dish", step="validation")
+        return
+    input_count = sum(bool(value) for value in (request.dish, request.prompt, request.image_url))
+    if input_count != 1:
+        raise ValidationError(
+            "provide exactly one of --dish, --prompt, or --image-url",
+            step="validation",
+        )
+    if has_image_options and not request.dish:
+        raise ValidationError("image options require --dish", step="validation")
 
 
 def _load_or_scan(
     request: PipelineRequest,
     settings: Settings,
     run_dir: Path,
+    food_image: FoodImageArtifact | None = None,
 ) -> tuple[ScanResponse, MealScan]:
     scan_path = run_dir / "scan.json"
     if request.use_cached_scan:
@@ -70,9 +128,21 @@ def _load_or_scan(
         shutil.copy2(request.use_cached_scan, scan_path)
         return response, meal_scan
 
+    prompt = request.prompt
+    image_url = request.image_url
+    if food_image:
+        prompt = None
+        image_url = food_image.public_url
+        if not image_url:
+            raise PipelineError(
+                "generated food image has no public URL for LOGI",
+                code=26,
+                step="r2",
+            )
+
     payload = build_scan_payload(
-        prompt=request.prompt,
-        image_url=request.image_url,
+        prompt=prompt,
+        image_url=image_url,
         language=settings.logi.language,
     )
     scanner = create_logi_scanner(settings)
@@ -83,8 +153,10 @@ def run_pipeline(request: PipelineRequest, settings: Settings) -> Path:
     run_dir = _init_run_dir(settings)
     logger = get_logger(__name__, step="pipeline")
     logger.info("starting pipeline run at %s", run_dir)
+    _validate_request(request)
 
-    response, meal_scan = _load_or_scan(request, settings, run_dir)
+    food_image = _prepare_dish_image(request, settings, run_dir)
+    response, meal_scan = _load_or_scan(request, settings, run_dir, food_image)
 
     script_planner = create_script_planner(settings)
     script_plan = script_planner(meal_scan, run_dir / "script_plan.json")
@@ -106,6 +178,10 @@ def run_pipeline(request: PipelineRequest, settings: Settings) -> Path:
             settings=settings,
             hf_project_dir=hf_project_dir,
             voice_duration_sec=voice_duration_sec,
+            food_image_path=food_image.image_path if food_image else None,
+            food_image_url=food_image.public_url if food_image else request.image_url,
+            dish=request.dish,
+            language=request.language,
         )
         copy_hf_artifacts_to_page_mirror(hf_project_dir, page_dir)
         ui_raw_video = run_hyperframes_render(

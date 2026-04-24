@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import json
 import shutil
 from pathlib import Path
 
 from jinja2 import Environment, select_autoescape
 
+from .ad_data import build_logi_ad_data
 from .config import Settings
 from .errors import PipelineError
 from .models import MealScan, ScriptPlan
@@ -28,8 +30,13 @@ def prepare_hf_project_dir(run_dir: Path, settings: Settings) -> Path:
     return hf_dir
 
 
-def _sync_hf_project_shared_assets(hf_project_dir: Path, settings: Settings, project_root: Path) -> None:
-    """Copy vendor GSAP and optional placeholder into hf_project/assets (used by all render modes)."""
+def _sync_hf_project_shared_assets(
+    hf_project_dir: Path,
+    settings: Settings,
+    project_root: Path,
+    food_image_path: Path | None = None,
+) -> str | None:
+    """Copy shared runtime assets into hf_project/assets."""
     assets_dir = hf_project_dir / "assets"
     assets_dir.mkdir(parents=True, exist_ok=True)
 
@@ -40,8 +47,71 @@ def _sync_hf_project_shared_assets(hf_project_dir: Path, settings: Settings, pro
 
     gsap_src = project_root / "assets" / "vendor" / "gsap.min.js"
     if not gsap_src.exists():
-        raise PipelineError("missing local GSAP runtime: assets/vendor/gsap.min.js", code=40, step="render")
+        raise PipelineError(
+            "missing local GSAP runtime: assets/vendor/gsap.min.js",
+            code=40,
+            step="render",
+        )
     shutil.copy2(gsap_src, assets_dir / "gsap.min.js")
+
+    dynamic_src = project_root / "assets" / "hyperframes" / "dynamic-ad.js"
+    if not dynamic_src.exists():
+        raise PipelineError(
+            "missing HyperFrames dynamic runtime: assets/hyperframes/dynamic-ad.js",
+            code=40,
+            step="render",
+        )
+    shutil.copy2(dynamic_src, assets_dir / "dynamic-ad.js")
+
+    if food_image_path and food_image_path.exists():
+        image_name = f"generated_food_image{food_image_path.suffix.lower()}"
+        shutil.copy2(food_image_path, assets_dir / image_name)
+        return f"assets/{image_name}"
+    return None
+
+
+def _inject_dynamic_scripts(html_path: Path, *, nested: bool) -> None:
+    text = html_path.read_text(encoding="utf-8")
+    if "logi_ad_data.js" in text:
+        return
+    prefix = "../assets" if nested else "./assets"
+    scripts = (
+        f'    <script src="{prefix}/logi_ad_data.js"></script>\n'
+        f'    <script src="{prefix}/dynamic-ad.js"></script>\n'
+    )
+    marker = "    <script>\n      window.__timelines"
+    if marker in text:
+        text = text.replace(marker, scripts + marker, 1)
+    else:
+        text = text.replace("</body>", scripts + "</body>", 1)
+    html_path.write_text(text, encoding="utf-8")
+
+
+def _write_dynamic_ad_payload(
+    *,
+    hf_project_dir: Path,
+    meal_scan: MealScan,
+    script_plan: ScriptPlan,
+    food_image_asset: str | None,
+    food_image_url: str | None,
+    dish: str | None,
+    language: str,
+) -> None:
+    assets_dir = hf_project_dir / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    payload = build_logi_ad_data(
+        meal_scan=meal_scan,
+        script_plan=script_plan,
+        dish=dish,
+        food_image_asset=food_image_asset,
+        food_image_url=food_image_url,
+        language=language,
+    )
+    js = "window.LOGI_AD_DATA = " + json.dumps(payload, ensure_ascii=True, indent=2) + ";\n"
+    (assets_dir / "logi_ad_data.js").write_text(js, encoding="utf-8")
+    _inject_dynamic_scripts(hf_project_dir / "index.html", nested=False)
+    for composition in (hf_project_dir / "compositions").glob("*.html"):
+        _inject_dynamic_scripts(composition, nested=True)
 
 
 def render_hyperframes_index(
@@ -50,20 +120,39 @@ def render_hyperframes_index(
     settings: Settings,
     hf_project_dir: Path,
     voice_duration_sec: float,
+    food_image_path: Path | None = None,
+    food_image_url: str | None = None,
+    dish: str | None = None,
+    language: str = "en",
 ) -> Path:
-    """Prepare hf_project: sync assets; either keep static index.html or render Jinja from tamplate.html."""
+    """Prepare hf_project index and dynamic assets."""
     project_root = resolve_project_root(settings)
     index_path = hf_project_dir / "index.html"
 
-    _sync_hf_project_shared_assets(hf_project_dir, settings, project_root)
+    food_image_asset = _sync_hf_project_shared_assets(
+        hf_project_dir,
+        settings,
+        project_root,
+        food_image_path,
+    )
 
     if settings.hyperframes.render_mode == "static_project":
         if not index_path.is_file():
             raise PipelineError(
-                "static_project mode: missing hf_project/index.html (check hyperframes.project_template_dir)",
+                "static_project mode: missing hf_project/index.html "
+                "(check hyperframes.project_template_dir)",
                 code=40,
                 step="render",
             )
+        _write_dynamic_ad_payload(
+            hf_project_dir=hf_project_dir,
+            meal_scan=meal_scan,
+            script_plan=script_plan,
+            food_image_asset=food_image_asset,
+            food_image_url=food_image_url,
+            dish=dish,
+            language=language,
+        )
         return index_path
 
     template_source = (project_root / "tamplate.html").read_text(encoding="utf-8")

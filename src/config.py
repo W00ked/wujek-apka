@@ -45,6 +45,33 @@ class OpenAIConfig(BaseModel):
     max_retries: int = 3
 
 
+class ImagePricingConfig(BaseModel):
+    text_input_per_1m: float = 5.0
+    text_cached_input_per_1m: float = 1.25
+    image_input_per_1m: float = 8.0
+    image_cached_input_per_1m: float = 2.0
+    image_output_per_1m: float = 30.0
+
+
+class ImageGenerationConfig(BaseModel):
+    model: str = "gpt-image-2"
+    prompt_version: str = "food-photo-v1"
+    size: Literal["auto", "1024x1024", "1536x1024", "1024x1536"] = "1024x1536"
+    quality: Literal["low", "medium", "high", "auto"] = "high"
+    output_format: Literal["png", "jpeg", "webp"] = "webp"
+    output_compression: int | None = Field(default=92, ge=0, le=100)
+    variants: int = Field(default=1, ge=1, le=4)
+    cache_dir: Path = Path("artifacts/image_cache")
+    max_cost_usd: float = 1.0
+    allow_high_cost: bool = False
+    pricing: ImagePricingConfig = Field(default_factory=ImagePricingConfig)
+
+
+class R2Config(BaseModel):
+    key_prefix: str = "logi-food-images"
+    cache_control: str = "public, max-age=31536000, immutable"
+
+
 class TTSConfig(BaseModel):
     model: str = "gemini-3.1-flash-tts-preview"
     voice_name: str = Field(min_length=1)
@@ -144,6 +171,11 @@ class SecretsConfig(BaseSettings):
     openai_api_key: str = Field(alias="OPENAI_API_KEY")
     google_api_key: str = Field(alias="GOOGLE_API_KEY")
     heygen_api_key: str | None = Field(default=None, alias="HEYGEN_API_KEY")
+    r2_account_id: str | None = Field(default=None, alias="R2_ACCOUNT_ID")
+    r2_access_key_id: str | None = Field(default=None, alias="R2_ACCESS_KEY_ID")
+    r2_secret_access_key: str | None = Field(default=None, alias="R2_SECRET_ACCESS_KEY")
+    r2_bucket: str | None = Field(default=None, alias="R2_BUCKET")
+    r2_public_base_url: str | None = Field(default=None, alias="R2_PUBLIC_BASE_URL")
 
 
 class Settings(BaseModel):
@@ -151,6 +183,8 @@ class Settings(BaseModel):
     render: RenderConfig
     logi: LogiConfig
     openai: OpenAIConfig
+    image_generation: ImageGenerationConfig
+    r2: R2Config
     tts: TTSConfig
     subtitles: SubtitlesConfig
     heygen: HeyGenConfig
@@ -187,6 +221,8 @@ def load_settings(config_path: str | Path = "config.yaml") -> Settings:
             render=RenderConfig.model_validate(raw.get("render", {})),
             logi=LogiConfig.model_validate(raw.get("logi", {})),
             openai=OpenAIConfig.model_validate(raw.get("openai", {})),
+            image_generation=ImageGenerationConfig.model_validate(raw.get("image_generation", {})),
+            r2=R2Config.model_validate(raw.get("r2", {})),
             tts=TTSConfig.model_validate(raw.get("tts", {})),
             subtitles=SubtitlesConfig.model_validate(raw.get("subtitles", {})),
             heygen=HeyGenConfig.model_validate(raw.get("heygen", {})),
