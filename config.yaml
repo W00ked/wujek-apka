@@ -65,7 +65,7 @@ subtitles:
   fontsdir: assets/fonts
 
 heygen:
-  enabled: true
+  enabled: false
   api_base_url: https://api.heygen.com
   video_generate_path: /v3/videos
   status_path: /v3/videos/{video_id}

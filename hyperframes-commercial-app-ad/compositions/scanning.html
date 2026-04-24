@@ -1,0 +1,280 @@
+<template id="ad-scanning-template">
+  <div id="scan-root"
+       data-composition-id="ad-scanning"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="scan-bg"
+         class="clip scan-bg"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="1"></div>
+
+    <div id="scan-phone-shadow"
+         class="clip scan-phone-shadow"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="2"></div>
+
+    <div id="scan-phone-frame"
+         class="clip scan-phone-frame"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="3"></div>
+
+    <img id="scan-screen"
+         class="clip scan-screen"
+         src="../assets/screens/app-add-loading.png"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="4">
+
+    <div id="scan-dim"
+         class="clip scan-dim"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="5"></div>
+
+    <span id="scan-step-pill"
+          class="clip scan-step-pill"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="10">Step 2</span>
+
+    <span id="scan-headline"
+          class="clip scan-headline"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="11">The app starts scanning</span>
+
+    <span id="scan-subline"
+          class="clip scan-subline"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="12">It reads the food photo and checks the nutrition profile.</span>
+
+    <div id="scan-orb"
+         class="clip scan-orb"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="30"></div>
+
+    <div id="scan-ring-a"
+         class="clip scan-ring scan-ring-a"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="31"></div>
+
+    <div id="scan-ring-b"
+         class="clip scan-ring scan-ring-b"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="32"></div>
+
+    <div id="scan-sweep-line"
+         class="clip scan-sweep-line"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="33"></div>
+
+    <span id="scan-orb-text"
+          class="clip scan-orb-text"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="34">Scanning</span>
+
+    <span id="scan-chip-1"
+          class="clip scan-chip scan-chip-1"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="35">photo</span>
+
+    <span id="scan-chip-2"
+          class="clip scan-chip scan-chip-2"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="36">ingredients</span>
+
+    <span id="scan-chip-3"
+          class="clip scan-chip scan-chip-3"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="37">glycemic load</span>
+
+    <style>
+      #scan-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --red: #ee001b;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: #0d1712;
+      }
+      #scan-root * { box-sizing: border-box; }
+      #scan-root .clip { position: absolute; }
+      #scan-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          radial-gradient(circle at 50% 24%, rgba(75,157,108,0.52), transparent 36%),
+          linear-gradient(180deg, #0d1712 0%, #1c3125 100%);
+      }
+      #scan-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 54px 120px rgba(0,0,0,0.42);
+        background: rgba(255,255,255,0.08);
+      }
+      #scan-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+      }
+      #scan-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #scan-dim {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        border-radius: 54px;
+        background: rgba(17,24,39,0.34);
+      }
+      #scan-step-pill {
+        left: 70px;
+        top: 84px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(0,0,0,0.25);
+      }
+      #scan-headline {
+        left: 70px;
+        top: 150px;
+        width: 820px;
+        color: #ffffff;
+        font-size: 58px;
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: -2px;
+      }
+      #scan-subline {
+        left: 70px;
+        top: 270px;
+        width: 750px;
+        color: rgba(255,255,255,0.80);
+        font-size: 31px;
+        line-height: 1.26;
+        font-weight: 500;
+      }
+      #scan-orb {
+        left: 335px;
+        top: 740px;
+        width: 410px;
+        height: 410px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(255,255,255,0.98) 0 34%, rgba(75,157,108,0.92) 35% 56%, rgba(75,157,108,0.20) 57% 100%);
+        box-shadow: 0 0 0 28px rgba(75,157,108,0.12), 0 30px 90px rgba(0,0,0,0.30);
+      }
+      .scan-ring {
+        left: 305px;
+        top: 710px;
+        width: 470px;
+        height: 470px;
+        border-radius: 50%;
+        border: 3px solid rgba(255,255,255,0.42);
+        opacity: 0;
+      }
+      #scan-ring-b {
+        left: 270px;
+        top: 675px;
+        width: 540px;
+        height: 540px;
+        border-color: rgba(75,157,108,0.44);
+      }
+      #scan-sweep-line {
+        left: 180px;
+        top: 620px;
+        width: 720px;
+        height: 7px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, #ffffff, #4b9d6c, transparent);
+        box-shadow: 0 0 28px rgba(255,255,255,0.65);
+        opacity: 0;
+      }
+      #scan-orb-text {
+        left: 335px;
+        top: 906px;
+        width: 410px;
+        text-align: center;
+        color: #111827;
+        font-size: 44px;
+        line-height: 1;
+        font-weight: 820;
+        letter-spacing: -0.6px;
+      }
+      .scan-chip {
+        height: 54px;
+        padding: 13px 22px 0;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.92);
+        color: #2b724f;
+        font-size: 25px;
+        line-height: 1;
+        font-weight: 740;
+        box-shadow: 0 18px 52px rgba(0,0,0,0.19);
+      }
+      #scan-chip-1 { left: 238px; top: 1240px; }
+      #scan-chip-2 { left: 418px; top: 1298px; }
+      #scan-chip-3 { left: 584px; top: 1222px; }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#scan-phone-shadow", "#scan-phone-frame", "#scan-screen"], { opacity: 0, y: 80, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.54, stagger: 0.03, ease: "power3.out" }, 0);
+      tl.fromTo("#scan-dim", { opacity: 0 }, { opacity: 1, duration: 0.42, ease: "power2.out" }, 0.34);
+      tl.fromTo(["#scan-step-pill", "#scan-headline", "#scan-subline"], { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.42, stagger: 0.08, ease: "power3.out" }, 0.42);
+      tl.fromTo("#scan-orb", { opacity: 0, scale: 0.70, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.58, ease: "back.out(1.6)" }, 0.84);
+      tl.fromTo("#scan-orb-text", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 1.04);
+      tl.fromTo(["#scan-ring-a", "#scan-ring-b"], { opacity: 0, scale: 0.68 }, { opacity: 1, scale: 1.18, duration: 1.25, stagger: 0.22, ease: "power2.out" }, 1.05);
+      tl.to(["#scan-ring-a", "#scan-ring-b"], { opacity: 0, duration: 0.45, ease: "power2.out" }, 2.20);
+      tl.fromTo("#scan-sweep-line", { opacity: 0, y: 0 }, { opacity: 1, y: 500, duration: 0.86, ease: "power2.inOut" }, 1.35);
+      tl.to("#scan-sweep-line", { y: 100, duration: 0.70, ease: "power2.inOut" }, 2.22);
+      tl.to("#scan-sweep-line", { opacity: 0, duration: 0.22, ease: "power2.out" }, 2.86);
+      tl.fromTo(["#scan-chip-1", "#scan-chip-2", "#scan-chip-3"], { opacity: 0, y: 24, scale: 0.88 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, stagger: 0.13, ease: "back.out(1.6)" }, 1.78);
+      tl.to("#scan-orb", { scale: 1.055, duration: 0.22, ease: "power2.out", transformOrigin: "center center" }, 3.08);
+      tl.to("#scan-orb", { scale: 1, duration: 0.30, ease: "power2.out", transformOrigin: "center center" }, 3.30);
+      tl.set({}, {}, 4.4);
+      window.__timelines["ad-scanning"] = tl;
+    </script>
+  </div>
+</template>

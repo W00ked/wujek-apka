@@ -1,0 +1,210 @@
+<template id="ad-nutrition-template">
+  <div id="nutrition-root"
+       data-composition-id="ad-nutrition"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="nutrition-bg"
+         class="clip nutrition-bg"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="1"></div>
+
+    <div id="nutrition-phone-shadow"
+         class="clip nutrition-phone-shadow"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="2"></div>
+
+    <div id="nutrition-phone-frame"
+         class="clip nutrition-phone-frame"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="3"></div>
+
+    <img id="nutrition-screen-detail"
+         class="clip nutrition-screen nutrition-screen-detail"
+         src="../assets/screens/app-meal-detail.png"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="4">
+
+    <img id="nutrition-screen-label"
+         class="clip nutrition-screen nutrition-screen-label"
+         src="../assets/screens/app-nutrition.png"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="5">
+
+    <span id="nutrition-step-pill"
+          class="clip nutrition-step-pill"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="10">Step 4</span>
+
+    <span id="nutrition-headline"
+          class="clip nutrition-headline"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="11">Nutrition label, not guesswork</span>
+
+    <span id="nutrition-caption"
+          class="clip nutrition-caption"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="12">Calories, carbs, fats, fiber, protein, water — all shown in the same native UI.</span>
+
+    <div id="nutrition-red-glow"
+         class="clip nutrition-red-glow"
+         data-start="0"
+         data-duration="4.4"
+         data-track-index="30"></div>
+
+    <span id="nutrition-callout-gl"
+          class="clip nutrition-callout nutrition-callout-gl"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="31">Glycemic Load: 61</span>
+
+    <span id="nutrition-callout-cal"
+          class="clip nutrition-callout nutrition-callout-cal"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="32">1037 calories</span>
+
+    <span id="nutrition-callout-carb"
+          class="clip nutrition-callout nutrition-callout-carb"
+          data-start="0"
+          data-duration="4.4"
+          data-track-index="33">83g carbohydrates</span>
+
+    <style>
+      #nutrition-root {
+        --canvas: #f4f4f3;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --red: #ee001b;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: var(--canvas);
+      }
+      #nutrition-root * { box-sizing: border-box; }
+      #nutrition-root .clip { position: absolute; }
+      #nutrition-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          linear-gradient(180deg, rgba(75,157,108,0.24), rgba(244,244,243,0) 38%),
+          #f4f4f3;
+      }
+      #nutrition-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 46px 110px rgba(17,24,39,0.22);
+        background: rgba(255,255,255,0.42);
+      }
+      #nutrition-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+      }
+      .nutrition-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #nutrition-screen-label { opacity: 0; }
+      #nutrition-step-pill {
+        left: 64px;
+        top: 86px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(17,24,39,0.13);
+      }
+      #nutrition-headline {
+        left: 64px;
+        top: 150px;
+        width: 785px;
+        color: var(--text);
+        font-size: 56px;
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: -2px;
+      }
+      #nutrition-caption {
+        left: 64px;
+        top: 268px;
+        width: 720px;
+        color: #536071;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+      #nutrition-red-glow {
+        left: 166px;
+        top: 428px;
+        width: 468px;
+        height: 164px;
+        border-radius: 28px;
+        box-shadow: 0 0 0 8px rgba(238,0,27,0.60), 0 24px 70px rgba(238,0,27,0.20);
+        opacity: 0;
+      }
+      .nutrition-callout {
+        height: 64px;
+        padding: 16px 24px 0;
+        border-radius: 999px;
+        color: #ffffff;
+        background: var(--green);
+        font-size: 30px;
+        line-height: 1;
+        font-weight: 820;
+        letter-spacing: -0.3px;
+        box-shadow: 0 18px 54px rgba(17,24,39,0.22);
+        opacity: 0;
+      }
+      #nutrition-callout-gl { left: 130px; top: 640px; background: var(--red); }
+      #nutrition-callout-cal { right: 118px; top: 610px; background: #111827; }
+      #nutrition-callout-carb { right: 112px; top: 930px; background: var(--green); }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#nutrition-phone-shadow", "#nutrition-phone-frame", "#nutrition-screen-detail", "#nutrition-screen-label"], { opacity: 0, x: 70, scale: 0.97 }, { opacity: 1, x: 0, scale: 1, duration: 0.58, stagger: 0.025, ease: "power3.out" }, 0);
+      tl.set("#nutrition-screen-label", { opacity: 0 }, 0.01);
+      tl.fromTo(["#nutrition-step-pill", "#nutrition-headline", "#nutrition-caption"], { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.40, stagger: 0.08, ease: "power3.out" }, 0.34);
+      tl.to("#nutrition-screen-label", { opacity: 1, duration: 0.42, ease: "power2.out" }, 1.22);
+      tl.to("#nutrition-screen-detail", { opacity: 0, duration: 0.32, ease: "power2.out" }, 1.30);
+      tl.fromTo("#nutrition-red-glow", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.34, ease: "power2.out" }, 1.62);
+      tl.to("#nutrition-red-glow", { opacity: 0.35, duration: 0.60, ease: "power2.out" }, 2.40);
+      tl.fromTo(["#nutrition-callout-gl", "#nutrition-callout-cal", "#nutrition-callout-carb"], { opacity: 0, y: 28, scale: 0.86 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, stagger: 0.14, ease: "back.out(1.7)" }, 1.78);
+      tl.to(["#nutrition-callout-gl", "#nutrition-callout-cal", "#nutrition-callout-carb"], { y: -6, duration: 0.20, stagger: 0.04, ease: "power2.out" }, 3.04);
+      tl.to(["#nutrition-callout-gl", "#nutrition-callout-cal", "#nutrition-callout-carb"], { y: 0, duration: 0.24, stagger: 0.04, ease: "power2.out" }, 3.26);
+      tl.set({}, {}, 4.4);
+      window.__timelines["ad-nutrition"] = tl;
+    </script>
+  </div>
+</template>

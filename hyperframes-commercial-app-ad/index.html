@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meal Scan Commercial Animation</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    :root {
+      --canvas: #f4f4f3;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #737b8a;
+      --line: #e2e6eb;
+      --green: #4b9d6c;
+      --green-dark: #2b724f;
+      --green-soft: #eaf4ee;
+      --red: #ee001b;
+      --blue: #4251b6;
+      --radius-xl: 54px;
+      --radius-lg: 38px;
+      --radius-md: 24px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #101615; }
+    #main {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 0%, #5aa878 0%, #f4f4f3 38%, #f4f4f3 100%);
+      color: var(--text);
+      font-family: var(--font);
+    }
+    .composition-slot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      opacity: 0;
+      transform-origin: center center;
+    }
+    #hook-slot { z-index: 1; }
+    #add-meal-slot { z-index: 2; }
+    #scan-slot { z-index: 3; }
+    #results-slot { z-index: 4; }
+    #nutrition-slot { z-index: 5; }
+    #ingredients-slot { z-index: 6; }
+    #insights-slot { z-index: 7; }
+    #cta-slot { z-index: 8; }
+  </style>
+</head>
+<body>
+  <div id="main"
+       data-composition-id="dashboard"
+       data-start="0"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="hook-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-hook"
+         data-composition-src="./compositions/hook.html"
+         data-start="0"
+         data-track-index="1"></div>
+
+    <div id="add-meal-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-add-meal"
+         data-composition-src="./compositions/add-meal.html"
+         data-start="3.10"
+         data-track-index="2"></div>
+
+    <div id="scan-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-scanning"
+         data-composition-src="./compositions/scanning.html"
+         data-start="7.80"
+         data-track-index="3"></div>
+
+    <div id="results-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-results"
+         data-composition-src="./compositions/results.html"
+         data-start="11.40"
+         data-track-index="4"></div>
+
+    <div id="nutrition-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-nutrition"
+         data-composition-src="./compositions/nutrition.html"
+         data-start="15.20"
+         data-track-index="5"></div>
+
+    <div id="ingredients-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-ingredients"
+         data-composition-src="./compositions/ingredients.html"
+         data-start="18.90"
+         data-track-index="6"></div>
+
+    <div id="insights-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-insights"
+         data-composition-src="./compositions/insights.html"
+         data-start="22.40"
+         data-track-index="7"></div>
+
+    <div id="cta-slot"
+         class="clip composition-slot"
+         data-composition-id="ad-cta"
+         data-composition-src="./compositions/cta.html"
+         data-start="26.20"
+         data-track-index="8"></div>
+
+    <audio id="audio-bed"
+           src="./assets/audio/subtle-bed.wav"
+           data-start="0"
+           data-duration="30"
+           data-volume="0.12"
+           data-track-index="100"></audio>
+
+    <audio id="audio-whoosh-1"
+           src="./assets/audio/whoosh-soft.wav"
+           data-start="3.05"
+           data-duration="0.58"
+           data-volume="0.35"
+           data-track-index="101"></audio>
+
+    <audio id="audio-tap-1"
+           src="./assets/audio/tap-soft.wav"
+           data-start="4.55"
+           data-duration="0.16"
+           data-volume="0.45"
+           data-track-index="102"></audio>
+
+    <audio id="audio-tap-2"
+           src="./assets/audio/tap-soft.wav"
+           data-start="5.85"
+           data-duration="0.16"
+           data-volume="0.40"
+           data-track-index="103"></audio>
+
+    <audio id="audio-whoosh-2"
+           src="./assets/audio/whoosh-soft.wav"
+           data-start="7.76"
+           data-duration="0.58"
+           data-volume="0.34"
+           data-track-index="104"></audio>
+
+    <audio id="audio-scan"
+           src="./assets/audio/scan-sweep.wav"
+           data-start="8.84"
+           data-duration="1.75"
+           data-volume="0.30"
+           data-track-index="105"></audio>
+
+    <audio id="audio-result-1"
+           src="./assets/audio/result-pop.wav"
+           data-start="11.98"
+           data-duration="0.49"
+           data-volume="0.42"
+           data-track-index="106"></audio>
+
+    <audio id="audio-whoosh-3"
+           src="./assets/audio/whoosh-soft.wav"
+           data-start="15.15"
+           data-duration="0.58"
+           data-volume="0.30"
+           data-track-index="107"></audio>
+
+    <audio id="audio-result-2"
+           src="./assets/audio/result-pop.wav"
+           data-start="16.35"
+           data-duration="0.49"
+           data-volume="0.34"
+           data-track-index="108"></audio>
+
+    <audio id="audio-whoosh-4"
+           src="./assets/audio/whoosh-soft.wav"
+           data-start="18.86"
+           data-duration="0.58"
+           data-volume="0.30"
+           data-track-index="109"></audio>
+
+    <audio id="audio-result-3"
+           src="./assets/audio/result-pop.wav"
+           data-start="23.50"
+           data-duration="0.49"
+           data-volume="0.30"
+           data-track-index="110"></audio>
+
+    <audio id="audio-cta"
+           src="./assets/audio/cta-chime.wav"
+           data-start="26.55"
+           data-duration="0.58"
+           data-volume="0.38"
+           data-track-index="111"></audio>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#hook-slot", { opacity: 0, scale: 1.035 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, 0);
+      tl.to("#hook-slot", { opacity: 0, scale: 0.98, y: -42, duration: 0.48, ease: "power3.inOut" }, 3.12);
+
+      tl.fromTo("#add-meal-slot", { opacity: 0, y: 70, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.58, ease: "power3.out" }, 3.10);
+      tl.to("#add-meal-slot", { opacity: 0, y: -60, scale: 0.985, duration: 0.46, ease: "power3.inOut" }, 7.92);
+
+      tl.fromTo("#scan-slot", { opacity: 0, scale: 1.025 }, { opacity: 1, scale: 1, duration: 0.42, ease: "power3.out" }, 7.80);
+      tl.to("#scan-slot", { opacity: 0, y: -48, scale: 0.985, duration: 0.44, ease: "power3.inOut" }, 11.48);
+
+      tl.fromTo("#results-slot", { opacity: 0, y: 58, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" }, 11.40);
+      tl.to("#results-slot", { opacity: 0, y: -58, scale: 0.985, duration: 0.44, ease: "power3.inOut" }, 15.30);
+
+      tl.fromTo("#nutrition-slot", { opacity: 0, x: 42, scale: 0.99 }, { opacity: 1, x: 0, scale: 1, duration: 0.52, ease: "power3.out" }, 15.20);
+      tl.to("#nutrition-slot", { opacity: 0, x: -40, scale: 0.99, duration: 0.42, ease: "power3.inOut" }, 19.00);
+
+      tl.fromTo("#ingredients-slot", { opacity: 0, y: 60, scale: 0.99 }, { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" }, 18.90);
+      tl.to("#ingredients-slot", { opacity: 0, y: -52, scale: 0.99, duration: 0.42, ease: "power3.inOut" }, 22.52);
+
+      tl.fromTo("#insights-slot", { opacity: 0, y: 60, scale: 0.99 }, { opacity: 1, y: 0, scale: 1, duration: 0.50, ease: "power3.out" }, 22.40);
+      tl.to("#insights-slot", { opacity: 0, scale: 0.985, duration: 0.46, ease: "power3.inOut" }, 26.30);
+
+      tl.fromTo("#cta-slot", { opacity: 0, scale: 1.02 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 26.20);
+      tl.set({}, {}, 30);
+      window.__timelines["dashboard"] = tl;
+    </script>
+  </div>
+</body>
+</html>

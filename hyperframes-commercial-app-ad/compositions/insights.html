@@ -1,0 +1,227 @@
+<template id="ad-insights-template">
+  <div id="insights-root"
+       data-composition-id="ad-insights"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="insights-bg"
+         class="clip insights-bg"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="1"></div>
+
+    <div id="insights-phone-shadow"
+         class="clip insights-phone-shadow"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="2"></div>
+
+    <div id="insights-phone-frame"
+         class="clip insights-phone-frame"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="3"></div>
+
+    <img id="insights-screen"
+         class="clip insights-screen"
+         src="../assets/screens/app-insights.png"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="4">
+
+    <span id="insights-step-pill"
+          class="clip insights-step-pill"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="10">Step 6</span>
+
+    <span id="insights-headline"
+          class="clip insights-headline"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="11">Then it explains the risks</span>
+
+    <span id="insights-caption"
+          class="clip insights-caption"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="12">Not just numbers — clear meal insights and warnings your viewer can understand.</span>
+
+    <div id="insights-card-glow"
+         class="clip insights-card-glow"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="30"></div>
+
+    <span id="insights-risk-1"
+          class="clip insights-risk insights-risk-1"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="31">High saturated fat</span>
+
+    <span id="insights-risk-2"
+          class="clip insights-risk insights-risk-2"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="32">High sodium</span>
+
+    <span id="insights-risk-3"
+          class="clip insights-risk insights-risk-3"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="33">Refined carbs</span>
+
+    <span id="insights-takeaway"
+          class="clip insights-takeaway"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="34">Better choices start with seeing what is actually inside.</span>
+
+    <style>
+      #insights-root {
+        --canvas: #f4f4f3;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --red: #ee001b;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: #f4f4f3;
+      }
+      #insights-root * { box-sizing: border-box; }
+      #insights-root .clip { position: absolute; }
+      #insights-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          radial-gradient(circle at 34% 8%, rgba(238,0,27,0.16), transparent 34%),
+          radial-gradient(circle at 80% 70%, rgba(75,157,108,0.22), transparent 38%),
+          #f4f4f3;
+      }
+      #insights-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 46px 110px rgba(17,24,39,0.22);
+        background: rgba(255,255,255,0.42);
+      }
+      #insights-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+      }
+      #insights-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #insights-step-pill {
+        left: 64px;
+        top: 84px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(17,24,39,0.13);
+      }
+      #insights-headline {
+        left: 64px;
+        top: 148px;
+        width: 810px;
+        color: var(--text);
+        font-size: 56px;
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: -2px;
+      }
+      #insights-caption {
+        left: 64px;
+        top: 266px;
+        width: 720px;
+        color: #536071;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+      #insights-card-glow {
+        left: 132px;
+        top: 344px;
+        width: 820px;
+        height: 1465px;
+        border-radius: 56px;
+        box-shadow: 0 0 0 8px rgba(75,157,108,0.42), 0 28px 88px rgba(75,157,108,0.16);
+        opacity: 0;
+      }
+      .insights-risk {
+        height: 64px;
+        padding: 16px 24px 0;
+        border-radius: 999px;
+        color: #ee001b;
+        background: #f8e5e6;
+        font-size: 30px;
+        line-height: 1;
+        font-weight: 780;
+        box-shadow: 0 18px 54px rgba(17,24,39,0.14);
+        opacity: 0;
+      }
+      #insights-risk-1 { left: 170px; top: 1224px; }
+      #insights-risk-2 { left: 170px; top: 1336px; }
+      #insights-risk-3 { left: 170px; top: 1448px; }
+      #insights-risk-1::before,
+      #insights-risk-2::before,
+      #insights-risk-3::before {
+        content: "⚑";
+        margin-right: 16px;
+      }
+      #insights-takeaway {
+        left: 138px;
+        bottom: 84px;
+        width: 805px;
+        padding: 25px 34px 0;
+        height: 112px;
+        border-radius: 36px;
+        background: rgba(17,24,39,0.86);
+        color: #ffffff;
+        font-size: 31px;
+        line-height: 1.2;
+        font-weight: 650;
+        letter-spacing: -0.35px;
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#insights-phone-shadow", "#insights-phone-frame", "#insights-screen"], { opacity: 0, y: 88, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.58, stagger: 0.03, ease: "power3.out" }, 0);
+      tl.fromTo(["#insights-step-pill", "#insights-headline", "#insights-caption"], { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.40, stagger: 0.08, ease: "power3.out" }, 0.32);
+      tl.fromTo("#insights-card-glow", { opacity: 0, scale: 0.985 }, { opacity: 1, scale: 1, duration: 0.42, ease: "power2.out" }, 1.00);
+      tl.to("#insights-card-glow", { opacity: 0.24, duration: 0.75, ease: "power2.out" }, 2.26);
+      tl.fromTo(["#insights-risk-1", "#insights-risk-2", "#insights-risk-3"], { opacity: 0, x: -24, scale: 0.92 }, { opacity: 1, x: 0, scale: 1, duration: 0.38, stagger: 0.20, ease: "back.out(1.7)" }, 1.34);
+      tl.fromTo("#insights-takeaway", { opacity: 0, y: 28, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.44, ease: "power3.out" }, 2.62);
+      tl.to(["#insights-risk-1", "#insights-risk-2", "#insights-risk-3"], { y: -5, duration: 0.18, stagger: 0.05, ease: "power2.out" }, 3.26);
+      tl.to(["#insights-risk-1", "#insights-risk-2", "#insights-risk-3"], { y: 0, duration: 0.24, stagger: 0.05, ease: "power2.out" }, 3.48);
+      tl.set({}, {}, 4.6);
+      window.__timelines["ad-insights"] = tl;
+    </script>
+  </div>
+</template>

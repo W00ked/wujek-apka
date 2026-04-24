@@ -1,0 +1,232 @@
+<template id="ad-ingredients-template">
+  <div id="ingredients-root"
+       data-composition-id="ad-ingredients"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="ingredients-bg"
+         class="clip ingredients-bg"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="1"></div>
+
+    <div id="ingredients-phone-shadow"
+         class="clip ingredients-phone-shadow"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="2"></div>
+
+    <div id="ingredients-phone-frame"
+         class="clip ingredients-phone-frame"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="3"></div>
+
+    <img id="ingredients-screen-top"
+         class="clip ingredients-screen ingredients-screen-top"
+         src="../assets/screens/app-ingredients-top.png"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="4">
+
+    <img id="ingredients-screen-bottom"
+         class="clip ingredients-screen ingredients-screen-bottom"
+         src="../assets/screens/app-ingredients-bottom.png"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="5">
+
+    <span id="ingredients-step-pill"
+          class="clip ingredients-step-pill"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="10">Step 5</span>
+
+    <span id="ingredients-headline"
+          class="clip ingredients-headline"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="11">Every ingredient gets exposed</span>
+
+    <span id="ingredients-caption"
+          class="clip ingredients-caption"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="12">Beef patty, bun, lettuce, tomatoes, cheese, mayo, fries — each with portion, GI and GL chips.</span>
+
+    <div id="ingredients-row-glow-1"
+         class="clip ingredients-row-glow ingredients-row-glow-1"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="30"></div>
+
+    <div id="ingredients-row-glow-2"
+         class="clip ingredients-row-glow ingredients-row-glow-2"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="31"></div>
+
+    <span id="ingredients-tag-1"
+          class="clip ingredients-tag ingredients-tag-1"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="32">GI / GL per ingredient</span>
+
+    <span id="ingredients-tag-2"
+          class="clip ingredients-tag ingredients-tag-2"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="33">editable list</span>
+
+    <span id="ingredients-scroll-label"
+          class="clip ingredients-scroll-label"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="34">scrolls through the full breakdown</span>
+
+    <style>
+      #ingredients-root {
+        --canvas: #f4f4f3;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --red: #ee001b;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: var(--canvas);
+      }
+      #ingredients-root * { box-sizing: border-box; }
+      #ingredients-root .clip { position: absolute; }
+      #ingredients-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          radial-gradient(circle at 80% 0%, rgba(75,157,108,0.28), transparent 34%),
+          linear-gradient(180deg, #f4f4f3 0%, #edf5f0 100%);
+      }
+      #ingredients-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 46px 110px rgba(17,24,39,0.22);
+        background: rgba(255,255,255,0.42);
+      }
+      #ingredients-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+      }
+      .ingredients-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #ingredients-screen-bottom { opacity: 0; }
+      #ingredients-step-pill {
+        left: 64px;
+        top: 86px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(17,24,39,0.13);
+      }
+      #ingredients-headline {
+        left: 64px;
+        top: 150px;
+        width: 850px;
+        color: var(--text);
+        font-size: 55px;
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: -2px;
+      }
+      #ingredients-caption {
+        left: 64px;
+        top: 270px;
+        width: 720px;
+        color: #536071;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+      .ingredients-row-glow {
+        left: 156px;
+        width: 792px;
+        height: 224px;
+        border-radius: 28px;
+        box-shadow: 0 0 0 7px rgba(75,157,108,0.66), 0 24px 70px rgba(75,157,108,0.18);
+        opacity: 0;
+      }
+      #ingredients-row-glow-1 { top: 446px; }
+      #ingredients-row-glow-2 { top: 716px; box-shadow: 0 0 0 7px rgba(238,0,27,0.52), 0 24px 70px rgba(238,0,27,0.14); }
+      .ingredients-tag {
+        height: 60px;
+        padding: 15px 24px 0;
+        border-radius: 999px;
+        background: var(--green);
+        color: #ffffff;
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 780;
+        box-shadow: 0 18px 54px rgba(17,24,39,0.20);
+        opacity: 0;
+      }
+      #ingredients-tag-1 { left: 118px; top: 1224px; }
+      #ingredients-tag-2 { right: 118px; top: 1460px; background: #111827; }
+      #ingredients-scroll-label {
+        left: 216px;
+        bottom: 74px;
+        height: 56px;
+        padding: 15px 28px 0;
+        border-radius: 999px;
+        background: rgba(17,24,39,0.78);
+        color: #ffffff;
+        font-size: 26px;
+        line-height: 1;
+        font-weight: 720;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#ingredients-phone-shadow", "#ingredients-phone-frame", "#ingredients-screen-top", "#ingredients-screen-bottom"], { opacity: 0, y: 80, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.58, stagger: 0.025, ease: "power3.out" }, 0);
+      tl.set("#ingredients-screen-bottom", { opacity: 0 }, 0.01);
+      tl.fromTo(["#ingredients-step-pill", "#ingredients-headline", "#ingredients-caption"], { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.40, stagger: 0.08, ease: "power3.out" }, 0.34);
+      tl.fromTo("#ingredients-row-glow-1", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.32, ease: "power2.out" }, 1.10);
+      tl.fromTo("#ingredients-row-glow-2", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.32, ease: "power2.out" }, 1.45);
+      tl.to(["#ingredients-row-glow-1", "#ingredients-row-glow-2"], { opacity: 0, duration: 0.46, ease: "power2.out" }, 2.08);
+      tl.fromTo("#ingredients-tag-1", { opacity: 0, y: 24, scale: 0.88 }, { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "back.out(1.7)" }, 1.68);
+      tl.to("#ingredients-screen-top", { y: -160, duration: 0.75, ease: "power2.inOut" }, 2.18);
+      tl.to("#ingredients-screen-bottom", { opacity: 1, duration: 0.42, ease: "power2.out" }, 2.42);
+      tl.to("#ingredients-screen-top", { opacity: 0, duration: 0.36, ease: "power2.out" }, 2.50);
+      tl.fromTo("#ingredients-tag-2", { opacity: 0, y: 24, scale: 0.88 }, { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "back.out(1.7)" }, 2.80);
+      tl.fromTo("#ingredients-scroll-label", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 3.22);
+      tl.set({}, {}, 4.6);
+      window.__timelines["ad-ingredients"] = tl;
+    </script>
+  </div>
+</template>

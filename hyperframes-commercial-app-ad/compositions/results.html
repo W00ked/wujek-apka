@@ -1,0 +1,226 @@
+<template id="ad-results-template">
+  <div id="results-root"
+       data-composition-id="ad-results"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="results-bg"
+         class="clip results-bg"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="1"></div>
+
+    <div id="results-phone-shadow"
+         class="clip results-phone-shadow"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="2"></div>
+
+    <div id="results-phone-frame"
+         class="clip results-phone-frame"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="3"></div>
+
+    <img id="results-screen-loading"
+         class="clip results-screen results-screen-loading"
+         src="../assets/screens/app-journal-loading.png"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="4">
+
+    <img id="results-screen-final"
+         class="clip results-screen results-screen-final"
+         src="../assets/screens/app-journal-result.png"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="5">
+
+    <span id="results-step-pill"
+          class="clip results-step-pill"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="10">Step 3</span>
+
+    <span id="results-headline"
+          class="clip results-headline"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="11">Results land instantly</span>
+
+    <span id="results-caption"
+          class="clip results-caption"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="12">The journal updates with the meal name, macros, calories, and glycemic load.</span>
+
+    <div id="results-card-glow"
+         class="clip results-card-glow"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="30"></div>
+
+    <span id="results-pop-gl"
+          class="clip results-pop results-pop-gl"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="31">GL 61</span>
+
+    <span id="results-pop-cal"
+          class="clip results-pop results-pop-cal"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="32">1017 cal</span>
+
+    <span id="results-pop-carb"
+          class="clip results-pop results-pop-carb"
+          data-start="0"
+          data-duration="4.6"
+          data-track-index="33">83g carbs</span>
+
+    <div id="results-flash"
+         class="clip results-flash"
+         data-start="0"
+         data-duration="4.6"
+         data-track-index="34"></div>
+
+    <style>
+      #results-root {
+        --canvas: #f4f4f3;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --red: #ee001b;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: var(--canvas);
+      }
+      #results-root * { box-sizing: border-box; }
+      #results-root .clip { position: absolute; }
+      #results-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          radial-gradient(circle at 30% 2%, rgba(75,157,108,0.28), transparent 34%),
+          radial-gradient(circle at 80% 82%, rgba(66,81,182,0.16), transparent 36%),
+          #f4f4f3;
+      }
+      #results-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 46px 110px rgba(17,24,39,0.23);
+        background: rgba(255,255,255,0.42);
+      }
+      #results-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+      }
+      .results-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #results-screen-final { opacity: 0; }
+      #results-step-pill {
+        left: 64px;
+        top: 88px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(17,24,39,0.13);
+      }
+      #results-headline {
+        left: 64px;
+        top: 154px;
+        width: 760px;
+        color: var(--text);
+        font-size: 58px;
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: -2px;
+      }
+      #results-caption {
+        left: 64px;
+        top: 272px;
+        width: 680px;
+        color: #536071;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+      #results-card-glow {
+        left: 215px;
+        top: 1120px;
+        width: 760px;
+        height: 220px;
+        border-radius: 54px;
+        box-shadow: 0 0 0 7px rgba(75,157,108,0.72), 0 24px 80px rgba(75,157,108,0.26);
+        opacity: 0;
+      }
+      .results-pop {
+        height: 62px;
+        padding: 15px 24px 0;
+        border-radius: 999px;
+        color: #ffffff;
+        font-size: 31px;
+        line-height: 1;
+        font-weight: 820;
+        letter-spacing: -0.3px;
+        box-shadow: 0 18px 54px rgba(17,24,39,0.22);
+        opacity: 0;
+      }
+      #results-pop-gl { left: 190px; top: 1012px; background: var(--red); }
+      #results-pop-cal { left: 560px; top: 1006px; background: var(--green); }
+      #results-pop-carb { left: 655px; top: 1284px; background: #111827; }
+      #results-flash {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background: #ffffff;
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#results-phone-shadow", "#results-phone-frame", "#results-screen-loading", "#results-screen-final"], { opacity: 0, y: 80, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.56, stagger: 0.025, ease: "power3.out" }, 0);
+      tl.set("#results-screen-final", { opacity: 0 }, 0.01);
+      tl.fromTo(["#results-step-pill", "#results-headline", "#results-caption"], { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.40, stagger: 0.08, ease: "power3.out" }, 0.32);
+      tl.to("#results-flash", { opacity: 0.72, duration: 0.08, ease: "power1.out" }, 1.18);
+      tl.to("#results-flash", { opacity: 0, duration: 0.22, ease: "power2.out" }, 1.26);
+      tl.to("#results-screen-final", { opacity: 1, duration: 0.36, ease: "power2.out" }, 1.20);
+      tl.to("#results-screen-loading", { opacity: 0, duration: 0.28, ease: "power2.out" }, 1.26);
+      tl.fromTo("#results-card-glow", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.34, ease: "power2.out" }, 1.46);
+      tl.to("#results-card-glow", { opacity: 0, duration: 0.62, ease: "power2.out" }, 2.34);
+      tl.fromTo(["#results-pop-gl", "#results-pop-cal", "#results-pop-carb"], { opacity: 0, y: 28, scale: 0.86 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, stagger: 0.14, ease: "back.out(1.7)" }, 1.60);
+      tl.to(["#results-pop-gl", "#results-pop-cal", "#results-pop-carb"], { y: -6, duration: 0.20, stagger: 0.04, ease: "power2.out" }, 2.62);
+      tl.to(["#results-pop-gl", "#results-pop-cal", "#results-pop-carb"], { y: 0, duration: 0.25, stagger: 0.04, ease: "power2.out" }, 2.84);
+      tl.set({}, {}, 4.6);
+      window.__timelines["ad-results"] = tl;
+    </script>
+  </div>
+</template>

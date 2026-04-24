@@ -1,0 +1,240 @@
+<template id="ad-add-meal-template">
+  <div id="add-root"
+       data-composition-id="ad-add-meal"
+       data-width="1080"
+       data-height="1920">
+
+    <div id="add-bg"
+         class="clip add-bg"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="1"></div>
+
+    <div id="add-phone-shadow"
+         class="clip add-phone-shadow"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="2"></div>
+
+    <div id="add-phone-frame"
+         class="clip add-phone-frame"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="3"></div>
+
+    <img id="add-screen-empty"
+         class="clip add-screen add-screen-empty"
+         src="../assets/screens/app-add-empty.png"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="4">
+
+    <img id="add-screen-filled"
+         class="clip add-screen add-screen-filled"
+         src="../assets/screens/app-add-filled.png"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="5">
+
+    <span id="add-step-pill"
+          class="clip add-step-pill"
+          data-start="0"
+          data-duration="5.4"
+          data-track-index="10">Step 1</span>
+
+    <span id="add-headline"
+          class="clip add-headline"
+          data-start="0"
+          data-duration="5.4"
+          data-track-index="11">Drop the photo into the app</span>
+
+    <span id="add-caption"
+          class="clip add-caption"
+          data-start="0"
+          data-duration="5.4"
+          data-track-index="12">The ad uses the same add-meal flow: meal tab, photo, description, then one green Add button.</span>
+
+    <div id="add-tap-ring-1"
+         class="clip add-tap-ring add-tap-ring-1"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="30"></div>
+
+    <div id="add-tap-ring-2"
+         class="clip add-tap-ring add-tap-ring-2"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="31"></div>
+
+    <div id="add-photo-glow"
+         class="clip add-photo-glow"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="32"></div>
+
+    <div id="add-button-glow"
+         class="clip add-button-glow"
+         data-start="0"
+         data-duration="5.4"
+         data-track-index="33"></div>
+
+    <span id="add-micro-label"
+          class="clip add-micro-label"
+          data-start="0"
+          data-duration="5.4"
+          data-track-index="34">real app interaction</span>
+
+    <style>
+      #add-root {
+        --canvas: #f4f4f3;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #737b8a;
+        --green: #4b9d6c;
+        --green-dark: #2b724f;
+        --line: #e2e6eb;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font);
+        background: var(--canvas);
+      }
+      #add-root * { box-sizing: border-box; }
+      #add-root .clip { position: absolute; }
+      #add-bg {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        background:
+          radial-gradient(circle at 70% 5%, rgba(75,157,108,0.34), transparent 35%),
+          linear-gradient(180deg, #ecf5ef 0%, #f4f4f3 42%, #f4f4f3 100%);
+      }
+      #add-phone-shadow {
+        left: 66px;
+        top: 46px;
+        width: 948px;
+        height: 1860px;
+        border-radius: 76px;
+        box-shadow: 0 46px 110px rgba(17,24,39,0.24);
+        background: rgba(255,255,255,0.45);
+      }
+      #add-phone-frame {
+        left: 82px;
+        top: 0;
+        width: 916px;
+        height: 1920px;
+        border-radius: 68px;
+        background: #ffffff;
+        box-shadow: inset 0 0 0 2px rgba(255,255,255,0.7);
+      }
+      .add-screen {
+        left: 100px;
+        top: 0;
+        width: 880px;
+        height: 1915px;
+        object-fit: fill;
+        border-radius: 54px;
+      }
+      #add-screen-filled { opacity: 0; }
+      #add-step-pill {
+        left: 66px;
+        top: 84px;
+        height: 54px;
+        padding: 13px 24px 0;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--green-dark);
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 790;
+        box-shadow: 0 16px 42px rgba(17,24,39,0.13);
+      }
+      #add-headline {
+        left: 66px;
+        top: 150px;
+        width: 780px;
+        color: var(--text);
+        font-size: 55px;
+        line-height: 1.04;
+        font-weight: 830;
+        letter-spacing: -1.8px;
+      }
+      #add-caption {
+        left: 66px;
+        top: 276px;
+        width: 720px;
+        color: #536071;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 500;
+        letter-spacing: -0.2px;
+      }
+      .add-tap-ring {
+        width: 118px;
+        height: 118px;
+        border-radius: 50%;
+        border: 8px solid rgba(75,157,108,0.9);
+        opacity: 0;
+      }
+      #add-tap-ring-1 { left: 804px; top: 610px; }
+      #add-tap-ring-2 { left: 452px; top: 1632px; }
+      #add-photo-glow {
+        left: 804px;
+        top: 610px;
+        width: 118px;
+        height: 118px;
+        border-radius: 28px;
+        background: rgba(75,157,108,0.28);
+        opacity: 0;
+      }
+      #add-button-glow {
+        left: 102px;
+        top: 1738px;
+        width: 876px;
+        height: 118px;
+        border-radius: 64px;
+        background: rgba(75,157,108,0.24);
+        box-shadow: 0 0 0 0 rgba(75,157,108,0.0);
+        opacity: 0;
+      }
+      #add-micro-label {
+        right: 74px;
+        bottom: 72px;
+        height: 50px;
+        padding: 12px 20px 0;
+        border-radius: 999px;
+        background: rgba(17,24,39,0.76);
+        color: #ffffff;
+        font-size: 24px;
+        line-height: 1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#add-phone-shadow", "#add-phone-frame", "#add-screen-empty", "#add-screen-filled"], { opacity: 0, y: 90, scale: 0.965 }, { opacity: 1, y: 0, scale: 1, duration: 0.66, stagger: 0.025, ease: "power3.out" }, 0);
+      tl.set("#add-screen-filled", { opacity: 0 }, 0.01);
+      tl.fromTo(["#add-step-pill", "#add-headline", "#add-caption"], { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: 0.42, stagger: 0.08, ease: "power3.out" }, 0.36);
+      tl.fromTo("#add-tap-ring-1", { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1.28, duration: 0.32, ease: "power2.out" }, 1.28);
+      tl.to("#add-tap-ring-1", { opacity: 0, scale: 1.75, duration: 0.36, ease: "power2.out" }, 1.60);
+      tl.fromTo("#add-photo-glow", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.26, ease: "power2.out" }, 1.42);
+      tl.to("#add-photo-glow", { opacity: 0, duration: 0.40, ease: "power2.out" }, 2.00);
+      tl.to("#add-screen-filled", { opacity: 1, duration: 0.42, ease: "power2.out" }, 2.06);
+      tl.to("#add-screen-empty", { opacity: 0, duration: 0.42, ease: "power2.out" }, 2.08);
+      tl.fromTo("#add-tap-ring-2", { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1.20, duration: 0.32, ease: "power2.out" }, 3.05);
+      tl.to("#add-tap-ring-2", { opacity: 0, scale: 1.65, duration: 0.36, ease: "power2.out" }, 3.37);
+      tl.fromTo("#add-button-glow", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.24, ease: "power2.out" }, 3.16);
+      tl.to("#add-button-glow", { boxShadow: "0 0 0 28px rgba(75,157,108,0.0)", opacity: 0, duration: 0.55, ease: "power2.out" }, 3.44);
+      tl.fromTo("#add-micro-label", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" }, 3.65);
+      tl.set({}, {}, 5.4);
+      window.__timelines["ad-add-meal"] = tl;
+    </script>
+  </div>
+</template>
